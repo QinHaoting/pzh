@@ -1,0 +1,31 @@
+# 服务器配置
+server:
+  port: 80
+
+
+spring:
+  # 数据源配置
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/pzh_db?serverTimezone=UTC
+      username: root
+      password: 123456
+  # swagger配置
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+
+# MybatisPlus配置
+mybatis-plus:
+  global-config:
+    db-config:
+      table-prefix: tbl_
+      id-type: auto
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#允许访问 接口开发文档
+swagger:
+  enable: true
