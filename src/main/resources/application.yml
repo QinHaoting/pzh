@@ -25,6 +25,8 @@ mybatis-plus:
       id-type: auto
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: false
+
 
 #允许访问 接口开发文档
 swagger:
