@@ -11,80 +11,65 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserServiceImpl userService;
+    private UserServiceImpl userServiceImpl;
 
     //------------------查询-----------------------
     /**
-     * 根据用户账号查找用户
-     * @param id 用户账号u_id
+     * 根据条件查询用户
+     * 没有条件返回所有用户
+     * @param user 查询条件
      * @return 指定用户
      */
-    @RequestMapping("/getById")
-    public R getById(Integer id) {
-        return new R(true, userService.getById(id));
-    }
-
-    /**
-     * @return 所有用户对象
-     */
-    @RequestMapping("/getAll")
-    public R getAll() {
-        return new R(true, userService.list());
-    }
-
-    /**
-     * 根据用户账号查询用户
-     * @param account 用户账号
-     * @return 指定用户
-     */
-    @RequestMapping("/getByAccount")
-    public R getByAccount(String account) {
-        LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<User>();
-        userLambdaQueryWrapper.eq(!account.equals(""), User::getAccount, account);
-        return new R(true, userService.list(userLambdaQueryWrapper));
-    }
-
-    /**
-     * 根据用户名查询用户
-     * @param name 用户名
-     * @return 指定用户
-     */
-    @RequestMapping("/getByName")
-    public R getByName(String name) {
-        LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<User>();
-        userLambdaQueryWrapper.like(!name.equals(""), User::getName, name);
-        return new R(true, userService.list(userLambdaQueryWrapper));
-    }
-
-    /**
-     * 根据电话查询用户
-     * @param phone 用户名
-     * @return 指定用户
-     */
-    @RequestMapping("/getByPhone")
-    public R getByPhone(String phone) {
-        LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<User>();
-        userLambdaQueryWrapper.like(!phone.equals(""), User::getPhone, phone);
-        return new R(true, userService.list(userLambdaQueryWrapper));
+    @RequestMapping("/get")
+    public R getUserByCondition(@RequestBody User user) {
+        LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 根据用户编号查
+        userLambdaQueryWrapper.eq((user.getId()!=null) && (user.getId()>=0),
+                                            User::getId, user.getId());
+        // 根据用户账号查
+        userLambdaQueryWrapper.eq((user.getAccount()!=null) && (!user.getAccount().equals("")),
+                                            User::getAccount, user.getAccount());
+        // 根据用户名查
+        userLambdaQueryWrapper.eq((user.getName()!=null) && (!user.getName().equals("")),
+                                            User::getName, user.getName());
+        // 根据电话查
+        userLambdaQueryWrapper.eq((user.getPhone()!=null) && (!user.getPhone().equals("")),
+                                            User::getPhone, user.getPhone());
+        // 根据邮箱查
+        userLambdaQueryWrapper.eq((user.getEmail()!=null) && (!user.getEmail().equals("")),
+                                            User::getEmail, user.getEmail());
+        return new R(true, userServiceImpl.list(userLambdaQueryWrapper));
     }
 
 
     //------------------添加-----------------------
+    /**
+     * 根据用户填写信息添加用户
+     * @param user 用户信息
+     * @return 是否添加
+     */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addUser(@RequestBody User user) {
-        if (user.getRole_id() != 1) {
+        if (user.getRole_id()!=null || user.getRole_id() != 1) {
             user.setRole_id(2); // 默认为普通用户
         }
-        return new R(true, userService.save(user));
+        return new R(true, userServiceImpl.save(user));
     }
 
 
     //------------------更新-----------------------
+
+    /**
+     * 根据用户输入进行用户信息修改
+     * @param user 用户输入条件
+     * @return 是否修改成功
+     */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R updateUser(@RequestBody User user) {
-        return new R(true, userService.updateById(user));
+        return new R(true, userServiceImpl.updateById(user));
     }
 
+    //------------------删除--------------------
     /**
      * 根据ID删除用户
      * @param id 用户编号
@@ -92,7 +77,7 @@ public class UserController {
      */
     @RequestMapping(value = "/delete")
     public R deleteUserByID(Integer id) {
-        return new R(true, userService.removeById(id));
+        return new R(true, userServiceImpl.removeById(id));
     }
 
     /**
@@ -102,8 +87,8 @@ public class UserController {
      */
     @RequestMapping(value = "/deleteByAccount")
     public R deleteUserByAccount(String account) {
-        LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<User>();
+        LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
         userLambdaQueryWrapper.eq(!account.equals(""), User::getAccount, account);
-        return new R(true, userService.remove(userLambdaQueryWrapper));
+        return new R(true, userServiceImpl.remove(userLambdaQueryWrapper));
     }
 }
