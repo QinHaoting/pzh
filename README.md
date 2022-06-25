@@ -38,3 +38,9 @@
 ### 前端
 
 - HBuilder X `3.4.x`
+
+## 项目准备
+
+1. 先创建一个名为`pzh_db`数据库，然后导入`.\src\main\java\com\pzh\sql\pzh_db.sql`数据库脚本文件
+2. 然后去`.\src\main\resources\application.yml`改其中的数据库配置，如用户名、密码
+3. 然后**IDEA**项目运行即可
