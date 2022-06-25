@@ -20,7 +20,7 @@ public class UserController {
      * @param user 查询条件
      * @return 指定用户
      */
-    @RequestMapping("/get")
+    @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getUserByCondition(@RequestBody User user) {
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
         // 根据用户编号查

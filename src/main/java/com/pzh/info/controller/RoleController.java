@@ -9,44 +9,34 @@ import com.pzh.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/role")
 public class RoleController {
     @Autowired
-    private RoleServiceImpl roleService;
-
+    private RoleServiceImpl roleServiceImpl;
+    //------------------查询-----------------------
     /**
-     * 根据角色ID查找角色
-     * @param id 角色ID
-     * @return 指定用户
-     */
-    @RequestMapping("/getById")
-    public R getRoleById(Integer id) {
-        return new R(true, roleService.getById(id));
-    }
-
-    /**
-     * @return 所有角色
-     */
-    @RequestMapping("/getAll")
-    public R getAllRoles() {
-        return new R(true, roleService.list());
-    }
-
-    /**
-     * 根据角色名查询角色
-     * @param name 角色名
+     * 根据条件查询角色
+     * 没有条件返回所有角色
+     * @param role 查询条件
      * @return 指定角色
      */
-    @RequestMapping("/getByName")
-    public R getRoleByName(String name) {
-        LambdaQueryWrapper<Role> userLambdaQueryWrapper = new LambdaQueryWrapper<Role>();
-        userLambdaQueryWrapper.like(!name.equals(""), Role::getName, name);
-        return new R(true, roleService.list(userLambdaQueryWrapper));
+    @RequestMapping(value = "/get", method = RequestMethod.POST)
+    public R getRoleByCondition(@RequestBody Role role) {
+        LambdaQueryWrapper<Role> roleLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 根据角色编号查
+        roleLambdaQueryWrapper.eq((role.getId()!=null) && (role.getId()>=0),
+                                            Role::getId, role.getId());
+        // 根据角色名查
+        roleLambdaQueryWrapper.eq((role.getName()!=null) && (!role.getName().equals("")),
+                                            Role::getName, role.getName());
+        return new R(true, roleServiceImpl.list(roleLambdaQueryWrapper));
     }
 
+    //------------------添加-----------------------
     /**
      * 添加一个角色
      * @param role 角色名
@@ -54,9 +44,10 @@ public class RoleController {
      */
     @RequestMapping("/add")
     public R addRole(@RequestBody Role role) {
-        return new R(roleService.save(role));
+        return new R(roleServiceImpl.save(role));
     }
 
+    //------------------删除-----------------------
     /**
      * 删除一个角色
      * @param ID 角色编号
@@ -64,16 +55,17 @@ public class RoleController {
      */
     @RequestMapping("/delete")
     public R deleteRole(String ID) {
-        return new R(roleService.removeById(ID));
+        return new R(roleServiceImpl.removeById(ID));
     }
 
+    //------------------修改-----------------------
     /**
      * 根据角色编号修改一个角色
      * @param role 角色信息
-     * @return 是否删除成功
+     * @return 是否修改成功
      */
     @RequestMapping("/update")
-    public R deleteRole(@RequestBody Role role) {
-        return new R(roleService.updateById(role));
+    public R updateRole(@RequestBody Role role) {
+        return new R(roleServiceImpl.updateById(role));
     }
 }

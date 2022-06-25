@@ -18,25 +18,14 @@ public class OrderController {
 
     //------------------查询-----------------------
     /**
-     * 根据订单编号查找订单
-     * @param id 订单编号o_id
-     * @return 指定订单
-     */
-    @RequestMapping("/getById")
-    public R getOrderById(Integer id) {
-        System.out.println(orderServiceImpl.getById(1));
-        return new R(true, orderServiceImpl.getById(id));
-    }
-
-    /**
      * 根据用户条件查询订单
      * @param order 输入的条件
      * @return 指定仓库
      */
-    @RequestMapping("/getByCondition")
+    @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getOrderByCondition(@RequestBody Order order) {
         LambdaQueryWrapper<Order> orderLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        // 根据用户编号查
+        // 根据订单编号查
         orderLambdaQueryWrapper.eq((order.getId()!=null) && (order.getId()>=0),
                                             Order::getId, order.getId());
         // 车辆编号查

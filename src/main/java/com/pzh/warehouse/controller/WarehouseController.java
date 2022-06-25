@@ -25,7 +25,7 @@ public class WarehouseController {
      * @param warehouse 查询条件
      * @return 指定仓库
      */
-    @RequestMapping("/get")
+    @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getWarehouseByCondition(@RequestBody Warehouse warehouse) {
         LambdaQueryWrapper<Warehouse> warehouseLambdaQueryWrapper = new LambdaQueryWrapper<>();
         // 根据仓库编号查
