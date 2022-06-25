@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @TableName("tbl_role")
 public class Role {
-    @ApiModelProperty(value="角色编号", name="id", required=true, example = "r001")
+    @ApiModelProperty(value="角色编号", name="id", required=true, example = "1")
     @TableId(value = "r_id", type = IdType.AUTO)
     private Integer id;
 
