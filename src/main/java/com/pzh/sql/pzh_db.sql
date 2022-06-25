@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 25/06/2022 08:54:16
+ Date: 25/06/2022 17:18:22
 */
 
 SET NAMES utf8mb4;
@@ -91,7 +91,7 @@ CREATE TABLE `tbl_firm`  (
   `f_introduce` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `f_address` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `f_name` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `f_principle` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `f_leader` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `f_phone` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`f_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
@@ -99,7 +99,7 @@ CREATE TABLE `tbl_firm`  (
 -- ----------------------------
 -- Records of tbl_firm
 -- ----------------------------
-INSERT INTO `tbl_firm` VALUES (1, '哪都通，异能运输，宝儿姐押镖！', '重大DS3402', '一人之下', '宝儿姐', '010-86551124');
+INSERT INTO `tbl_firm` VALUES (1, '好公司啊', '重庆大学', '一人之下', '宝儿姐', '110');
 
 -- ----------------------------
 -- Table structure for tbl_goods
@@ -174,13 +174,17 @@ CREATE TABLE `tbl_order`  (
   CONSTRAINT `tbl_order_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `tbl_user` (`u_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tbl_order_ibfk_2` FOREIGN KEY (`g_id`) REFERENCES `tbl_goods` (`g_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tbl_order_ibfk_3` FOREIGN KEY (`c_id`) REFERENCES `tbl_cars` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_order
 -- ----------------------------
 INSERT INTO `tbl_order` VALUES (1, 5, 1, '重庆', '福建', 0, 1, '2022-06-23 16:25:25', NULL);
 INSERT INTO `tbl_order` VALUES (2, 1, 1, '四川', '贵州', 1, 2, '2022-06-23 16:25:25', NULL);
+INSERT INTO `tbl_order` VALUES (3, 2, 4, '北京', '上海', 1, 2, '2022-06-23 16:25:16', NULL);
+INSERT INTO `tbl_order` VALUES (4, 3, 4, '广西', '广东', 0, 1, '2022-06-23 08:21:25', NULL);
+INSERT INTO `tbl_order` VALUES (5, 1, 4, '海南', '甘肃', 0, 8, '2022-06-24 10:25:25', '先送我的吧，麻了');
+INSERT INTO `tbl_order` VALUES (6, 6, 4, '海南', '甘肃', 0, 6, '2022-06-25 22:25:25', '好东西');
 
 -- ----------------------------
 -- Table structure for tbl_role
@@ -214,7 +218,7 @@ CREATE TABLE `tbl_user`  (
   UNIQUE INDEX `u_account`(`u_account`) USING BTREE,
   INDEX `r_id`(`r_id`) USING BTREE,
   CONSTRAINT `tbl_user_ibfk_1` FOREIGN KEY (`r_id`) REFERENCES `tbl_role` (`r_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_user
@@ -224,6 +228,7 @@ INSERT INTO `tbl_user` VALUES (4, '444', 2, '000000', NULL, NULL, '浩廷是爹'
 INSERT INTO `tbl_user` VALUES (5, '456', 2, '123456', NULL, NULL, 'iii');
 INSERT INTO `tbl_user` VALUES (6, '888', 2, '123', NULL, NULL, 'kkk');
 INSERT INTO `tbl_user` VALUES (7, '666', 2, '123', NULL, NULL, 'hhh');
+INSERT INTO `tbl_user` VALUES (8, '9999', 2, '123456', NULL, NULL, 'Haoting');
 
 -- ----------------------------
 -- Table structure for tbl_warehouse
@@ -237,7 +242,7 @@ CREATE TABLE `tbl_warehouse`  (
   PRIMARY KEY (`w_id`) USING BTREE,
   INDEX `f_id`(`f_id`) USING BTREE,
   CONSTRAINT `tbl_warehouse_ibfk_1` FOREIGN KEY (`f_id`) REFERENCES `tbl_firm` (`f_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_warehouse
@@ -245,5 +250,8 @@ CREATE TABLE `tbl_warehouse`  (
 INSERT INTO `tbl_warehouse` VALUES (1, 1, 10000, '重庆');
 INSERT INTO `tbl_warehouse` VALUES (2, 1, 10000, '四川');
 INSERT INTO `tbl_warehouse` VALUES (3, 1, 10000, '湖北');
+INSERT INTO `tbl_warehouse` VALUES (4, 1, 5000, '广西');
+INSERT INTO `tbl_warehouse` VALUES (5, 1, 5000, '广西');
+INSERT INTO `tbl_warehouse` VALUES (6, 1, 88888, '西藏');
 
 SET FOREIGN_KEY_CHECKS = 1;
