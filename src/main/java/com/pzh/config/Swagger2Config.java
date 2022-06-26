@@ -1,5 +1,6 @@
 package com.pzh.config;
 
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -8,12 +9,14 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@EnableSwagger2
 @Configuration
+@EnableSwagger2
+@EnableKnife4j
 public class Swagger2Config {
 
     @Value("${swagger.enable}")
@@ -27,18 +30,22 @@ public class Swagger2Config {
                 .enable(swaggerEnable)
                 .apiInfo(apiInfo())
                 .select()
-                //.apis(RequestHandlerSelectors.basePackage("com.cdwm.mrp.controller")) 指定扫描包
+                .apis(RequestHandlerSelectors.basePackage("com.pzh.controller")) //指定扫描包
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .paths(PathSelectors.any())
                 //只显示api路径下的页面
                 //.paths(Predicates.and(PathSelectors.regex("/api/.*")))
-                .build();
+                .build()
+                .groupName("API");
     }
 
     private ApiInfo apiInfo() {
+        //作者信息
+        Contact contact = new Contact("秦浩廷", "http://localhost:80/doc.html#/", "1165101405@qq.com");
         return new ApiInfoBuilder()
-                .title("客户记录API文档")
-                .description("客户记录API文档")
+                .title("攀枝花物流管理系统API文档")
+                .description("攀枝花物流管理系统API文档")
+                .contact(contact)
                 .version("1.0.0")
                 .build();
     }
