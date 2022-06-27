@@ -19,4 +19,8 @@ public class Role {
     @ApiModelProperty(value="角色名称", name="name", required=true, example = "普通用户")
     @TableField(value = "r_name")
     private String name;
+
+    @ApiModelProperty(value="角色描述", name="info", required=true, example = "系统管理员拥有最高权限")
+    @TableField(value = "r_info")
+    private String info;
 }
