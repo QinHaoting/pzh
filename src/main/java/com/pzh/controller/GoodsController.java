@@ -29,6 +29,8 @@ public class GoodsController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getRoleByCondition(@RequestBody Goods goods) {
         LambdaQueryWrapper<Goods> goodsLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 筛选出有效的货物
+        goodsLambdaQueryWrapper.eq(true, Goods::getValid, true);
         // 根据货物编号查
         goodsLambdaQueryWrapper.eq((goods.getId()!=null) && (goods.getId()>=0),
                                                 Goods::getId, goods.getId());
@@ -54,6 +56,7 @@ public class GoodsController {
     })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addRole(@RequestBody Goods goods) {
+        goods.setValid(true); // 将有效位启用
         return new R(goodsServiceImpl.save(goods));
     }
 
@@ -74,6 +77,8 @@ public class GoodsController {
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public R deleteRole(Integer id) {
-        return new R(goodsServiceImpl.removeById(id));
+        Goods goods = goodsServiceImpl.getById(id);
+        goods.setValid(false); // 有效位设为失效
+        return new R(goodsServiceImpl.updateById(goods));
     }
 }

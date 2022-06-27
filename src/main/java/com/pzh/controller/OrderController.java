@@ -29,6 +29,8 @@ public class OrderController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getOrderByCondition(@RequestBody Order order) {
         LambdaQueryWrapper<Order> orderLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 筛选出有效的订单
+        orderLambdaQueryWrapper.eq(true, Order::getValid, true);
         // 根据订单编号查
         orderLambdaQueryWrapper.eq((order.getId()!=null) && (order.getId()>=0),
                                             Order::getId, order.getId());
@@ -60,6 +62,7 @@ public class OrderController {
     })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addOrder(@RequestBody Order order) {
+        order.setValid(true); // 启用有效位
         return new R(orderServiceImpl.save(order));
     }
 
@@ -82,6 +85,8 @@ public class OrderController {
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public R deleteOrder(Integer id) {
-        return new R(orderServiceImpl.removeById(id));
+        Order order = orderServiceImpl.getById(id);
+        order.setValid(false); // 有效位设为失效
+        return new R(orderServiceImpl.updateById(order));
     }
 }

@@ -23,6 +23,8 @@ public class UserController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getUserByCondition(@RequestBody User user) {
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 筛选出有效的用户
+        userLambdaQueryWrapper.eq(true, User::getValid, true);
         // 根据用户编号查
         userLambdaQueryWrapper.eq((user.getId()!=null) && (user.getId()>=0),
                                             User::getId, user.getId());
@@ -62,6 +64,7 @@ public class UserController {
         if (userServiceImpl.getOne(userLambdaQueryWrapper) != null) {
             return new R(false, null, "用户账号已被注册");
         }
+        user.setValid(true); // 将用户启用
         return new R(true, userServiceImpl.save(user), "用户注册成功");
     }
 
@@ -83,7 +86,9 @@ public class UserController {
     })
     @RequestMapping(value = "/deleteByID", method = RequestMethod.GET)
     public R deleteUserByID(Integer id) {
-        return new R(true, userServiceImpl.removeById(id));
+        User user = userServiceImpl.getById(id);
+        user.setValid(false); // 将用户有效位置为失效
+        return new R(true, userServiceImpl.updateById(user));
     }
 
     /**
@@ -99,6 +104,8 @@ public class UserController {
     public R deleteUserByAccount(String account) {
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
         userLambdaQueryWrapper.eq(!account.equals(""), User::getAccount, account);
-        return new R(true, userServiceImpl.remove(userLambdaQueryWrapper));
+        User user = userServiceImpl.getOne(userLambdaQueryWrapper);
+        user.setValid(false); // 有效位设为失效
+        return new R(true, userServiceImpl.updateById(user));
     }
 }

@@ -29,6 +29,8 @@ public class RoleController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getRoleByCondition(@RequestBody Role role) {
         LambdaQueryWrapper<Role> roleLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 筛选出有效的角色
+        roleLambdaQueryWrapper.eq(true, Role::getValid, true);
         // 根据角色编号查
         roleLambdaQueryWrapper.eq((role.getId()!=null) && (role.getId()>=0),
                                             Role::getId, role.getId());
@@ -45,6 +47,7 @@ public class RoleController {
     })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addRole(@RequestBody Role role) {
+        role.setValid(true); // 将角色启用
         return new R(roleServiceImpl.save(role));
     }
 
@@ -65,6 +68,8 @@ public class RoleController {
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public R deleteRole(Integer id) {
-        return new R(roleServiceImpl.removeById(id));
+        Role role = roleServiceImpl.getById(id);
+        role.setValid(false); // 有效位设为失效
+        return new R(roleServiceImpl.updateById(role));
     }
 }

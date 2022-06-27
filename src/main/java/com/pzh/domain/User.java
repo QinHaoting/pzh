@@ -41,4 +41,8 @@ public class User implements Serializable {
     @ApiModelProperty(value="用户名", name="name", required=true, example = "宝儿姐")
     @TableField(value = "u_name")
     private String name;
+
+    @ApiModelProperty(value="有效位", name="valid", required=true, example = "1")
+    @TableField(value = "u_valid")
+    private Boolean valid;
 }

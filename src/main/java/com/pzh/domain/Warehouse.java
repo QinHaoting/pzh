@@ -29,4 +29,8 @@ public class Warehouse implements Serializable {
     @ApiModelProperty(value="仓库地址", name="address", example = "重庆")
     @TableField(value = "w_address")
     private String address;
+
+    @ApiModelProperty(value="有效位", name="valid", required=true, example = "1")
+    @TableField(value = "w_valid")
+    private Boolean valid;
 }

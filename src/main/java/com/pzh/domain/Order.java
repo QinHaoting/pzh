@@ -49,7 +49,15 @@ public class Order implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date start_time;
 
-    @ApiModelProperty(value="备注", name="remark", required=true, example = "务必休息一天的订单")
+    @ApiModelProperty(value="备注", name="other", required=true, example = "务必休息一天的订单")
     @TableField(value = "o_other")
-    private String remark;
+    private String other;
+
+    @ApiModelProperty(value="订单价格", name="price", required=true, example = "20.20")
+    @TableField(value = "o_price")
+    private Double price;
+
+    @ApiModelProperty(value="有效位", name="valid", required=true, example = "1")
+    @TableField(value = "o_valid")
+    private Boolean valid;
 }

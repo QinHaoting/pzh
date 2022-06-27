@@ -29,6 +29,8 @@ public class WarehouseController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getWarehouseByCondition(@RequestBody Warehouse warehouse) {
         LambdaQueryWrapper<Warehouse> warehouseLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 筛选出有效的仓库
+        warehouseLambdaQueryWrapper.eq(true, Warehouse::getValid, true);
         // 根据仓库编号查
         warehouseLambdaQueryWrapper.eq((warehouse.getId()!=null) && (warehouse.getId()>=0),
                                                 Warehouse::getId, warehouse.getId());
@@ -49,6 +51,7 @@ public class WarehouseController {
     })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addOrder(@RequestBody Warehouse warehouse) {
+        warehouse.setValid(true); // 将仓库启用
         return new R(warehouseServiceImpl.save(warehouse));
     }
 
@@ -70,6 +73,8 @@ public class WarehouseController {
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public R deleteWarehouse(Integer id) {
-        return new R(warehouseServiceImpl.removeById(id));
+        Warehouse warehouse = warehouseServiceImpl.getById(id);
+        warehouse.setValid(false); // 有效位设为失效
+        return new R(warehouseServiceImpl.updateById(warehouse));
     }
 }
