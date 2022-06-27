@@ -33,14 +33,14 @@ public class GoodsController {
         goodsLambdaQueryWrapper.eq((goods.getId()!=null) && (goods.getId()>=0),
                                                 Goods::getId, goods.getId());
         // 根据仓库编号查
-        goodsLambdaQueryWrapper.eq((goods.getWarehouse_id()!=null) && (goods.getId()>=0),
+        goodsLambdaQueryWrapper.eq((goods.getWarehouse_id()!=null) && (goods.getWarehouse_id()>=0),
                                                 Goods::getWarehouse_id, goods.getWarehouse_id());
         // 根据货物类型查
         goodsLambdaQueryWrapper.eq((goods.getType()!=null) && (!goods.getType().equals("")),
                                                 Goods::getType, goods.getType());
         // 根据货物描述查
-        goodsLambdaQueryWrapper.eq((goods.getDescribe()!=null) && (!goods.getDescribe().equals("")),
-                                                Goods::getDescribe, goods.getDescribe());
+        goodsLambdaQueryWrapper.eq((goods.getDescription()!=null) && (!goods.getDescription().equals("")),
+                                                Goods::getDescription, goods.getDescription());
         // 根据货物状态查
         goodsLambdaQueryWrapper.eq((goods.getStatus()!=null) && (goods.getStatus()>=0),
                                                 Goods::getStatus, goods.getStatus());

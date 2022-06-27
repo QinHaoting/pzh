@@ -31,9 +31,9 @@ public class Goods {
     @TableField(value = "g_num")
     private Integer num;
 
-    @ApiModelProperty(value="货物描述", name="describe", example = "西瓜")
+    @ApiModelProperty(value="货物描述", name="description", example = "西瓜")
     @TableField(value = "g_describe")
-    private String describe;
+    private String description;
 
     @ApiModelProperty(value="货物状态", name="status", required=true, example = "1")
     @TableField(value = "g_status")
