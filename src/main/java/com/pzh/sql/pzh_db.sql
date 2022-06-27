@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 27/06/2022 09:52:17
+ Date: 27/06/2022 16:18:53
 */
 
 SET NAMES utf8mb4;
@@ -27,41 +27,43 @@ CREATE TABLE `tbl_announce`  (
   `a_content` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `a_publisher` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `a_time` datetime(0) NOT NULL,
+  `a_valid` bit(1) NOT NULL,
   PRIMARY KEY (`a_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 10001 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_announce
 -- ----------------------------
-INSERT INTO `tbl_announce` VALUES (10001, '需求分析结束了', '遭数据库数据好烦', 'czr', '2022-06-23 16:25:25');
-INSERT INTO `tbl_announce` VALUES (10003, '标题2', '这是一条公告', 'Haoting', '2022-06-26 08:25:25');
+INSERT INTO `tbl_announce` VALUES (10001, '需求分析结束了', '遭数据库数据好烦', 'czr', '2022-06-23 16:25:25', b'1');
+INSERT INTO `tbl_announce` VALUES (10003, '标题2', '这是一条公告', 'Haoting', '2022-06-26 08:25:25', b'1');
 
 -- ----------------------------
--- Table structure for tbl_cars
+-- Table structure for tbl_car
 -- ----------------------------
-DROP TABLE IF EXISTS `tbl_cars`;
-CREATE TABLE `tbl_cars`  (
+DROP TABLE IF EXISTS `tbl_car`;
+CREATE TABLE `tbl_car`  (
   `c_id` int NOT NULL AUTO_INCREMENT,
-  `c_type` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `c_capacity` int NULL DEFAULT NULL,
+  `c_type` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `c_capacity` int NOT NULL,
   `c_image` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `c_card` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `c_number` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `c_card` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `c_number` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `c_valid` bit(1) NOT NULL,
   PRIMARY KEY (`c_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of tbl_cars
+-- Records of tbl_car
 -- ----------------------------
-INSERT INTO `tbl_cars` VALUES (1, '面包车', 7, NULL, 'B1', '渝A001');
-INSERT INTO `tbl_cars` VALUES (2, '厢式货车', 30, NULL, 'B2', '渝A002');
-INSERT INTO `tbl_cars` VALUES (3, '罐式车', 50, NULL, 'B1', '渝A003');
-INSERT INTO `tbl_cars` VALUES (4, '冷藏车 ', 35, NULL, 'C1', '渝A004');
-INSERT INTO `tbl_cars` VALUES (5, '保温车', 40, NULL, 'B1', '渝A005');
-INSERT INTO `tbl_cars` VALUES (6, '危险品车', 40, NULL, 'B2', '渝A006');
-INSERT INTO `tbl_cars` VALUES (7, '中巴货车', 55, NULL, 'B1', '渝A007');
-INSERT INTO `tbl_cars` VALUES (8, '铁笼车', 15, NULL, 'C1', '渝A008');
-INSERT INTO `tbl_cars` VALUES (9, '加长挂车', 65, NULL, 'C1', '渝A009');
+INSERT INTO `tbl_car` VALUES (1, '面包车', 7, NULL, 'B1', '渝A001', b'1');
+INSERT INTO `tbl_car` VALUES (2, '厢式货车', 30, NULL, 'B2', '渝A002', b'1');
+INSERT INTO `tbl_car` VALUES (3, '罐式车', 50, NULL, 'B1', '渝A003', b'1');
+INSERT INTO `tbl_car` VALUES (4, '冷藏车 ', 35, NULL, 'C1', '渝A004', b'1');
+INSERT INTO `tbl_car` VALUES (5, '保温车', 40, NULL, 'B1', '渝A005', b'1');
+INSERT INTO `tbl_car` VALUES (6, '危险品车', 40, NULL, 'B2', '渝A006', b'1');
+INSERT INTO `tbl_car` VALUES (7, '中巴货车', 55, NULL, 'B1', '渝A007', b'0');
+INSERT INTO `tbl_car` VALUES (8, '铁笼车', 15, NULL, 'C1', '渝A008', b'1');
+INSERT INTO `tbl_car` VALUES (9, '加长挂车', 65, NULL, 'C1', '渝A009', b'1');
 
 -- ----------------------------
 -- Table structure for tbl_check
@@ -70,18 +72,19 @@ DROP TABLE IF EXISTS `tbl_check`;
 CREATE TABLE `tbl_check`  (
   `ch_id` int NOT NULL AUTO_INCREMENT,
   `c_id` int NOT NULL,
-  `ch_question` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `ch_question` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `ch_time` datetime(0) NULL DEFAULT NULL,
   `ch_result` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `ch_valid` bit(1) NOT NULL,
   PRIMARY KEY (`ch_id`) USING BTREE,
   INDEX `c_id`(`c_id`) USING BTREE,
-  CONSTRAINT `tbl_check_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `tbl_cars` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `tbl_check_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `tbl_car` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_check
 -- ----------------------------
-INSERT INTO `tbl_check` VALUES (1, 1, '爆胎', '2022-06-23 16:25:25', '修好了!');
+INSERT INTO `tbl_check` VALUES (1, 1, '爆胎', '2022-06-23 16:25:25', '修好了!', b'1');
 
 -- ----------------------------
 -- Table structure for tbl_firm
@@ -95,13 +98,14 @@ CREATE TABLE `tbl_firm`  (
   `f_leader` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `f_phone` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `f_date` datetime(0) NOT NULL,
+  `f_valid` bit(1) NOT NULL,
   PRIMARY KEY (`f_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_firm
 -- ----------------------------
-INSERT INTO `tbl_firm` VALUES (1, '不加班的好公司', '重庆小学', '一人之下', '宝儿姐', '220', '2022-06-26 00:00:00');
+INSERT INTO `tbl_firm` VALUES (1, '不加班的好公司', '重庆小学', '一人之下', '宝儿姐', '220', '2022-06-26 00:00:00', b'1');
 
 -- ----------------------------
 -- Table structure for tbl_goods
@@ -112,8 +116,9 @@ CREATE TABLE `tbl_goods`  (
   `w_id` int NULL DEFAULT NULL,
   `g_type` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `g_num` int NOT NULL,
-  `g_describe` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `g_description` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `g_status` int NOT NULL DEFAULT 0,
+  `g_valid` bit(1) NOT NULL,
   PRIMARY KEY (`g_id`) USING BTREE,
   INDEX `w_id`(`w_id`) USING BTREE,
   CONSTRAINT `tbl_goods_ibfk_1` FOREIGN KEY (`w_id`) REFERENCES `tbl_warehouse` (`w_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -122,15 +127,17 @@ CREATE TABLE `tbl_goods`  (
 -- ----------------------------
 -- Records of tbl_goods
 -- ----------------------------
-INSERT INTO `tbl_goods` VALUES (1, 1, '建筑材料', 20, '水泥', 0);
-INSERT INTO `tbl_goods` VALUES (2, 1, '建筑材料', 15, '钢筋', 0);
-INSERT INTO `tbl_goods` VALUES (3, 2, '农产品', 12, '白菜', 0);
-INSERT INTO `tbl_goods` VALUES (4, 1, '建筑材料', 5000, '瓷砖5000张', 0);
-INSERT INTO `tbl_goods` VALUES (5, 2, '农产品', 12, '西瓜', 0);
-INSERT INTO `tbl_goods` VALUES (6, 2, '农产品', 12, '胡萝卜', 0);
-INSERT INTO `tbl_goods` VALUES (7, 2, '农产品', 20, '大豆', 0);
-INSERT INTO `tbl_goods` VALUES (8, 3, '生鲜产品', 8, '大黄鱼', 0);
-INSERT INTO `tbl_goods` VALUES (9, 3, '生鲜产品', 8, '鲜牛肚', 0);
+INSERT INTO `tbl_goods` VALUES (1, 1, '建筑材料', 20, '水泥', 0, b'1');
+INSERT INTO `tbl_goods` VALUES (2, 1, '建筑材料', 15, '钢筋', 0, b'1');
+INSERT INTO `tbl_goods` VALUES (3, 2, '农产品', 12, '白菜', 0, b'1');
+INSERT INTO `tbl_goods` VALUES (4, 1, '建筑材料', 5000, '瓷砖5000张', 0, b'1');
+INSERT INTO `tbl_goods` VALUES (5, 2, '农产品', 12, '西瓜', 0, b'1');
+INSERT INTO `tbl_goods` VALUES (6, 2, '农产品', 12, '胡萝卜', 0, b'1');
+INSERT INTO `tbl_goods` VALUES (7, 2, '农产品', 20, '大豆', 0, b'0');
+INSERT INTO `tbl_goods` VALUES (8, 3, '生鲜产品', 8, '大黄鱼', 0, b'1');
+INSERT INTO `tbl_goods` VALUES (9, 3, '生鲜产品', 8, '鲜牛肚', 0, b'1');
+INSERT INTO `tbl_goods` VALUES (10, 2, '危险品', 70, '硫酸', 1, b'1');
+INSERT INTO `tbl_goods` VALUES (11, NULL, '危险品', 100, '硫酸', 1, b'0');
 
 -- ----------------------------
 -- Table structure for tbl_material
@@ -142,6 +149,7 @@ CREATE TABLE `tbl_material`  (
   `m_name` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `m_num` int NOT NULL,
   `m_other` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `m_valid` bit(1) NOT NULL,
   PRIMARY KEY (`m_id`) USING BTREE,
   INDEX `w_id`(`w_id`) USING BTREE,
   CONSTRAINT `tbl_material_ibfk_1` FOREIGN KEY (`w_id`) REFERENCES `tbl_warehouse` (`w_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -150,10 +158,10 @@ CREATE TABLE `tbl_material`  (
 -- ----------------------------
 -- Records of tbl_material
 -- ----------------------------
-INSERT INTO `tbl_material` VALUES (1, 1, 'A4纸', 1000, '/张');
-INSERT INTO `tbl_material` VALUES (2, 1, '螺丝刀', 50, '/把');
-INSERT INTO `tbl_material` VALUES (3, 2, '摄像头', 3, '/个  防止小偷!');
-INSERT INTO `tbl_material` VALUES (4, 3, '空调', 4, '/台');
+INSERT INTO `tbl_material` VALUES (1, 1, 'A4纸', 1000, '/张', b'1');
+INSERT INTO `tbl_material` VALUES (2, 1, '螺丝刀', 50, '/把', b'1');
+INSERT INTO `tbl_material` VALUES (3, 2, '摄像头', 3, '/个  防止小偷!', b'1');
+INSERT INTO `tbl_material` VALUES (4, 3, '空调', 4, '/台', b'1');
 
 -- ----------------------------
 -- Table structure for tbl_order
@@ -169,24 +177,26 @@ CREATE TABLE `tbl_order`  (
   `g_id` int NOT NULL,
   `o_starttime` datetime(0) NOT NULL,
   `o_other` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `o_price` double NULL DEFAULT NULL,
+  `o_valid` bit(1) NOT NULL,
   PRIMARY KEY (`o_id`) USING BTREE,
   INDEX `u_id`(`u_id`) USING BTREE,
   INDEX `g_id`(`g_id`) USING BTREE,
   INDEX `c_id`(`c_id`) USING BTREE,
   CONSTRAINT `tbl_order_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `tbl_user` (`u_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tbl_order_ibfk_2` FOREIGN KEY (`g_id`) REFERENCES `tbl_goods` (`g_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `tbl_order_ibfk_3` FOREIGN KEY (`c_id`) REFERENCES `tbl_cars` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `tbl_order_ibfk_3` FOREIGN KEY (`c_id`) REFERENCES `tbl_car` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_order
 -- ----------------------------
-INSERT INTO `tbl_order` VALUES (1, 5, 1, '重庆', '福建', 0, 1, '2022-06-23 16:25:25', NULL);
-INSERT INTO `tbl_order` VALUES (2, 1, 1, '四川', '贵州', 1, 2, '2022-06-23 16:25:25', NULL);
-INSERT INTO `tbl_order` VALUES (3, 2, 4, '北京', '上海', 1, 2, '2022-06-23 16:25:16', NULL);
-INSERT INTO `tbl_order` VALUES (4, 3, 4, '广西', '广东', 0, 1, '2022-06-23 08:21:25', NULL);
-INSERT INTO `tbl_order` VALUES (5, 1, 4, '海南', '甘肃', 0, 8, '2022-06-24 10:25:25', '先送我的吧，麻了');
-INSERT INTO `tbl_order` VALUES (6, 6, 4, '海南', '甘肃', 0, 6, '2022-06-25 22:25:25', '好东西');
+INSERT INTO `tbl_order` VALUES (1, 5, 1, '重庆', '福建', 0, 1, '2022-06-23 16:25:25', NULL, 12, b'1');
+INSERT INTO `tbl_order` VALUES (2, 1, 1, '四川', '贵州', 1, 2, '2022-06-23 16:25:25', NULL, 20.24, b'1');
+INSERT INTO `tbl_order` VALUES (3, 2, 4, '北京', '上海', 1, 2, '2022-06-23 16:25:16', NULL, 88.12, b'1');
+INSERT INTO `tbl_order` VALUES (4, 3, 4, '广西', '广东', 0, 1, '2022-06-23 08:21:25', NULL, 110.5, b'0');
+INSERT INTO `tbl_order` VALUES (5, 1, 4, '海南', '甘肃', 0, 8, '2022-06-24 10:25:25', '先送我的吧，麻了', 60.4, b'1');
+INSERT INTO `tbl_order` VALUES (6, 6, 4, '海南', '甘肃', 0, 6, '2022-06-25 22:25:25', '好东西', 22, b'1');
 
 -- ----------------------------
 -- Table structure for tbl_role
@@ -196,14 +206,16 @@ CREATE TABLE `tbl_role`  (
   `r_id` int NOT NULL AUTO_INCREMENT,
   `r_name` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `r_info` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `r_valid` bit(1) NOT NULL,
   PRIMARY KEY (`r_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_role
 -- ----------------------------
-INSERT INTO `tbl_role` VALUES (1, '系统管理员', '系统管理员拥有最高权限');
-INSERT INTO `tbl_role` VALUES (2, '普通用户', '可以查看、添加订单等');
+INSERT INTO `tbl_role` VALUES (1, '系统管理员', '系统管理员拥有最高权限', b'1');
+INSERT INTO `tbl_role` VALUES (2, '普通用户', '可以查看、添加订单等', b'1');
+INSERT INTO `tbl_role` VALUES (6, '菜B采购员', '臭买菜的', b'0');
 
 -- ----------------------------
 -- Table structure for tbl_user
@@ -217,6 +229,7 @@ CREATE TABLE `tbl_user`  (
   `u_phone` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `u_email` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `u_name` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `u_valid` bit(1) NOT NULL,
   PRIMARY KEY (`u_id`) USING BTREE,
   UNIQUE INDEX `u_account`(`u_account`) USING BTREE,
   INDEX `r_id`(`r_id`) USING BTREE,
@@ -226,10 +239,12 @@ CREATE TABLE `tbl_user`  (
 -- ----------------------------
 -- Records of tbl_user
 -- ----------------------------
-INSERT INTO `tbl_user` VALUES (1, '123', 1, '123456', NULL, NULL, '宝儿姐');
-INSERT INTO `tbl_user` VALUES (4, '444', 2, '000000', NULL, NULL, '浩廷是爹');
-INSERT INTO `tbl_user` VALUES (5, '456', 2, '123456', NULL, NULL, 'iii');
-INSERT INTO `tbl_user` VALUES (8, '8888', 2, '123456', '10089', '123123@qq.com', '憨憨');
+INSERT INTO `tbl_user` VALUES (1, '123', 1, '123456', NULL, NULL, '宝儿姐', b'1');
+INSERT INTO `tbl_user` VALUES (4, '444', 2, '000000', NULL, NULL, '浩廷是爹', b'1');
+INSERT INTO `tbl_user` VALUES (5, '456', 2, '123456', NULL, NULL, 'iii', b'0');
+INSERT INTO `tbl_user` VALUES (8, '8888', 2, '123456', '10089', '123123@qq.com', '憨憨', b'0');
+INSERT INTO `tbl_user` VALUES (13, 'abc0000', 2, '123456', NULL, NULL, 'Haoting', b'1');
+INSERT INTO `tbl_user` VALUES (14, '9090', 2, '123456', NULL, NULL, 'Haoting', b'1');
 
 -- ----------------------------
 -- Table structure for tbl_warehouse
@@ -240,6 +255,7 @@ CREATE TABLE `tbl_warehouse`  (
   `f_id` int NULL DEFAULT NULL,
   `w_hold` int NOT NULL,
   `w_address` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `w_valid` bit(1) NOT NULL,
   PRIMARY KEY (`w_id`) USING BTREE,
   INDEX `f_id`(`f_id`) USING BTREE,
   CONSTRAINT `tbl_warehouse_ibfk_1` FOREIGN KEY (`f_id`) REFERENCES `tbl_firm` (`f_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -248,11 +264,12 @@ CREATE TABLE `tbl_warehouse`  (
 -- ----------------------------
 -- Records of tbl_warehouse
 -- ----------------------------
-INSERT INTO `tbl_warehouse` VALUES (1, 1, 10000, '重庆');
-INSERT INTO `tbl_warehouse` VALUES (2, 1, 10000, '四川');
-INSERT INTO `tbl_warehouse` VALUES (3, 1, 10000, '湖北');
-INSERT INTO `tbl_warehouse` VALUES (4, 1, 5000, '广西');
-INSERT INTO `tbl_warehouse` VALUES (5, 1, 5000, '广西');
-INSERT INTO `tbl_warehouse` VALUES (6, 1, 88888, '西藏');
+INSERT INTO `tbl_warehouse` VALUES (1, 1, 10000, '重庆', b'1');
+INSERT INTO `tbl_warehouse` VALUES (2, 1, 10000, '四川', b'1');
+INSERT INTO `tbl_warehouse` VALUES (3, 1, 10000, '湖北', b'1');
+INSERT INTO `tbl_warehouse` VALUES (4, 1, 5000, '广西', b'1');
+INSERT INTO `tbl_warehouse` VALUES (5, 1, 5000, '广西', b'1');
+INSERT INTO `tbl_warehouse` VALUES (6, 1, 88888, '西藏', b'1');
+INSERT INTO `tbl_warehouse` VALUES (8, 1, 808088, '广东', b'0');
 
 SET FOREIGN_KEY_CHECKS = 1;
