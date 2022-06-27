@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 27/06/2022 16:18:53
+ Date: 27/06/2022 17:42:13
 */
 
 SET NAMES utf8mb4;
@@ -64,6 +64,7 @@ INSERT INTO `tbl_car` VALUES (6, '危险品车', 40, NULL, 'B2', '渝A006', b'1'
 INSERT INTO `tbl_car` VALUES (7, '中巴货车', 55, NULL, 'B1', '渝A007', b'0');
 INSERT INTO `tbl_car` VALUES (8, '铁笼车', 15, NULL, 'C1', '渝A008', b'1');
 INSERT INTO `tbl_car` VALUES (9, '加长挂车', 65, NULL, 'C1', '渝A009', b'1');
+INSERT INTO `tbl_car` VALUES (10, '面包车', 70, NULL, 'C1', '桂R001', b'0');
 
 -- ----------------------------
 -- Table structure for tbl_check
@@ -106,6 +107,7 @@ CREATE TABLE `tbl_firm`  (
 -- Records of tbl_firm
 -- ----------------------------
 INSERT INTO `tbl_firm` VALUES (1, '不加班的好公司', '重庆小学', '一人之下', '宝儿姐', '220', '2022-06-26 00:00:00', b'1');
+INSERT INTO `tbl_firm` VALUES (2, '大爹的公司', '重庆大爹大学', '肖老师股份有限公司', '宝儿姐', '86-1023', '2022-06-26 00:00:00', b'0');
 
 -- ----------------------------
 -- Table structure for tbl_goods
@@ -162,6 +164,7 @@ INSERT INTO `tbl_material` VALUES (1, 1, 'A4纸', 1000, '/张', b'1');
 INSERT INTO `tbl_material` VALUES (2, 1, '螺丝刀', 50, '/把', b'1');
 INSERT INTO `tbl_material` VALUES (3, 2, '摄像头', 3, '/个  防止小偷!', b'1');
 INSERT INTO `tbl_material` VALUES (4, 3, '空调', 4, '/台', b'1');
+INSERT INTO `tbl_material` VALUES (5, 2, '剪刀', 60, '/把', b'0');
 
 -- ----------------------------
 -- Table structure for tbl_order
@@ -197,6 +200,8 @@ INSERT INTO `tbl_order` VALUES (3, 2, 4, '北京', '上海', 1, 2, '2022-06-23 1
 INSERT INTO `tbl_order` VALUES (4, 3, 4, '广西', '广东', 0, 1, '2022-06-23 08:21:25', NULL, 110.5, b'0');
 INSERT INTO `tbl_order` VALUES (5, 1, 4, '海南', '甘肃', 0, 8, '2022-06-24 10:25:25', '先送我的吧，麻了', 60.4, b'1');
 INSERT INTO `tbl_order` VALUES (6, 6, 4, '海南', '甘肃', 0, 6, '2022-06-25 22:25:25', '好东西', 22, b'1');
+INSERT INTO `tbl_order` VALUES (7, 2, 13, '河南', '湖南', 1, 6, '2022-06-25 22:25:25', '给我休息一下吧的订单', 82.1, b'1');
+INSERT INTO `tbl_order` VALUES (8, 2, 13, '河南', '河北', 0, 6, '2022-06-25 22:25:25', '给我休息一下吧的订单', 82.1, b'0');
 
 -- ----------------------------
 -- Table structure for tbl_role
