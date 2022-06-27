@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.Date;
+
 @ApiModel(value="Announce公告实体",description="公告记录")
 @Data
 @TableName("tbl_announce")
@@ -32,5 +34,5 @@ public class Announce {
     @ApiModelProperty(value="发布时间", name="time", required=true, example = "2022-06-23 16:25:25")
     @TableField(value = "a_time")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
-    private String time;
+    private Date time;
 }
