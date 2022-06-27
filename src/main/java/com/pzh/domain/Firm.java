@@ -44,4 +44,8 @@ public class Firm implements Serializable {
     @TableField(value = "f_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date date;
+
+    @ApiModelProperty(value="有效位", name="valid", required=true, example = "1")
+    @TableField(value = "f_valid")
+    private Boolean valid;
 }

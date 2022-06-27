@@ -38,4 +38,8 @@ public class Car {
     @ApiModelProperty(value="车牌", name="number", required=true, example = "渝A001")
     @TableField(value = "c_number")
     private String number;
+
+    @ApiModelProperty(value="有效位", name="valid", required=true, example = "1")
+    @TableField(value = "c_valid")
+    private Boolean valid;
 }

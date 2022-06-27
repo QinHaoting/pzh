@@ -29,6 +29,8 @@ public class MaterialController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getRoleByCondition(@RequestBody Material material) {
         LambdaQueryWrapper<Material> materialLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 筛选出有效的物资
+        materialLambdaQueryWrapper.eq(true, Material::getValid, true);
         // 根据物资编号查
         materialLambdaQueryWrapper.eq((material.getId()!=null) && (material.getId()>=0),
                                                 Material::getId, material.getId());
@@ -48,6 +50,7 @@ public class MaterialController {
     })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addRole(@RequestBody Material material) {
+        material.setValid(true); // 启用有效位
         return new R(materialServiceImpl.save(material));
     }
 
@@ -68,6 +71,8 @@ public class MaterialController {
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public R deleteRole(Integer id) {
-        return new R(materialServiceImpl.removeById(id));
+        Material material = materialServiceImpl.getById(id);
+        material.setValid(false); // 有效位设为失效
+        return new R(materialServiceImpl.updateById(material));
     }
 }

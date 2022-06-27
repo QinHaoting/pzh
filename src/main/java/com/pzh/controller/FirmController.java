@@ -29,6 +29,8 @@ public class FirmController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getUserByCondition(@RequestBody Firm firm) {
         LambdaQueryWrapper<Firm> firmLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 筛选出有效的公司
+        firmLambdaQueryWrapper.eq(true, Firm::getValid, true);
         // 根据公司编号查
         firmLambdaQueryWrapper.eq((firm.getId()!=null) && (firm.getId()>=0),
                                             Firm::getId, firm.getId());
@@ -52,6 +54,7 @@ public class FirmController {
     })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addUser(@RequestBody Firm firm) {
+        firm.setValid(true); // 启用有效位
         return new R(true, firmServiceImpl.save(firm));
     }
 
@@ -73,6 +76,8 @@ public class FirmController {
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public R deleteUserByID(Integer id) {
-        return new R(true, firmServiceImpl.removeById(id));
+        Firm firm = firmServiceImpl.getById(id);
+        firm.setValid(false); // 有效位设为失效
+        return new R(true, firmServiceImpl.updateById(firm));
     }
 }

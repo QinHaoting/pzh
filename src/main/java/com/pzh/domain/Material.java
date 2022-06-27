@@ -32,4 +32,8 @@ public class Material {
     @ApiModelProperty(value="备注", name="other", example = "/个")
     @TableField(value = "m_other")
     private String other;
+
+    @ApiModelProperty(value="有效位", name="valid", required=true, example = "1")
+    @TableField(value = "m_valid")
+    private Boolean valid;
 }

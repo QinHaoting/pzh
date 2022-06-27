@@ -29,6 +29,8 @@ public class CarController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getRoleByCondition(@RequestBody Car car) {
         LambdaQueryWrapper<Car> carLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 筛选出有效的车辆
+        carLambdaQueryWrapper.eq(true, Car::getValid, true);
         // 根据车辆编号查
         carLambdaQueryWrapper.eq((car.getId()!=null) && (car.getId()>=0),
                                                 Car::getId, car.getId());
@@ -51,7 +53,14 @@ public class CarController {
     })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addRole(@RequestBody Car car) {
-        return new R(carServiceImpl.save(car));
+        LambdaQueryWrapper<Car> carLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        carLambdaQueryWrapper.eq((car.getNumber()!=null) && (!car.getNumber().equals("")),
+                                            Car::getNumber, car.getNumber());
+        if (carServiceImpl.getOne(carLambdaQueryWrapper) != null) {
+            return new R(false, null, "车牌已存在");
+        }
+        car.setValid(true); // 启用有效位
+        return new R(true, carServiceImpl.save(car));
     }
 
     //------------------修改-----------------------
@@ -71,6 +80,8 @@ public class CarController {
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public R deleteRole(Integer id) {
-        return new R(carServiceImpl.removeById(id));
+        Car car = carServiceImpl.getById(id);
+        car.setValid(false); // 有效位设为失效
+        return new R(carServiceImpl.updateById(car));
     }
 }
