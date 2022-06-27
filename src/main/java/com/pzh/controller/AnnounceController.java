@@ -2,7 +2,7 @@ package com.pzh.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pzh.domain.Announce;
-import com.pzh.service.AnnounceServiceImpl;
+import com.pzh.service.impl.AnnounceServiceImpl;
 import com.pzh.util.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
