@@ -42,6 +42,6 @@ public class Firm implements Serializable {
 
     @ApiModelProperty(value="创办时间", name="date", required=true, example = "10086")
     @TableField(value = "f_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date date;
 }

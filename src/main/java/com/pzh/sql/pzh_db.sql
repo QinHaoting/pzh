@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 27/06/2022 09:41:11
+ Date: 27/06/2022 09:52:17
 */
 
 SET NAMES utf8mb4;
@@ -101,7 +101,7 @@ CREATE TABLE `tbl_firm`  (
 -- ----------------------------
 -- Records of tbl_firm
 -- ----------------------------
-INSERT INTO `tbl_firm` VALUES (1, '好公司啊', '重庆大学', '一人之下', '宝儿姐', '110', '2022-06-27 09:37:34');
+INSERT INTO `tbl_firm` VALUES (1, '不加班的好公司', '重庆小学', '一人之下', '宝儿姐', '220', '2022-06-26 00:00:00');
 
 -- ----------------------------
 -- Table structure for tbl_goods
