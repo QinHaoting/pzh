@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 27/06/2022 08:55:49
+ Date: 27/06/2022 09:41:11
 */
 
 SET NAMES utf8mb4;
@@ -34,6 +34,7 @@ CREATE TABLE `tbl_announce`  (
 -- Records of tbl_announce
 -- ----------------------------
 INSERT INTO `tbl_announce` VALUES (10001, '需求分析结束了', '遭数据库数据好烦', 'czr', '2022-06-23 16:25:25');
+INSERT INTO `tbl_announce` VALUES (10003, '标题2', '这是一条公告', 'Haoting', '2022-06-26 08:25:25');
 
 -- ----------------------------
 -- Table structure for tbl_cars
@@ -93,13 +94,14 @@ CREATE TABLE `tbl_firm`  (
   `f_name` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `f_leader` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `f_phone` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `f_date` datetime(0) NOT NULL,
   PRIMARY KEY (`f_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_firm
 -- ----------------------------
-INSERT INTO `tbl_firm` VALUES (1, '好公司啊', '重庆大学', '一人之下', '宝儿姐', '110');
+INSERT INTO `tbl_firm` VALUES (1, '好公司啊', '重庆大学', '一人之下', '宝儿姐', '110', '2022-06-27 09:37:34');
 
 -- ----------------------------
 -- Table structure for tbl_goods
