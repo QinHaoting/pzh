@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 28/06/2022 09:17:03
+ Date: 28/06/2022 09:59:24
 */
 
 SET NAMES utf8mb4;
@@ -56,16 +56,16 @@ CREATE TABLE `tbl_car`  (
 -- ----------------------------
 -- Records of tbl_car
 -- ----------------------------
-INSERT INTO `tbl_car` VALUES (1, '面包车', 7, NULL, 'B1', '渝A001', b'1');
-INSERT INTO `tbl_car` VALUES (2, '厢式货车', 30, NULL, 'B2', '渝A002', b'1');
-INSERT INTO `tbl_car` VALUES (3, '罐式车', 50, NULL, 'B1', '渝A003', b'1');
-INSERT INTO `tbl_car` VALUES (4, '冷藏车 ', 35, NULL, 'C1', '渝A004', b'1');
-INSERT INTO `tbl_car` VALUES (5, '保温车', 40, NULL, 'B1', '渝A005', b'1');
-INSERT INTO `tbl_car` VALUES (6, '危险品车', 40, NULL, 'B2', '渝A006', b'1');
-INSERT INTO `tbl_car` VALUES (7, '中巴货车', 55, NULL, 'B1', '渝A007', b'0');
-INSERT INTO `tbl_car` VALUES (8, '铁笼车', 15, NULL, 'C1', '渝A008', b'1');
-INSERT INTO `tbl_car` VALUES (9, '加长挂车', 65, NULL, 'C1', '渝A009', b'1');
-INSERT INTO `tbl_car` VALUES (10, '面包车', 70, NULL, 'C1', '桂R001', b'0');
+INSERT INTO `tbl_car` VALUES (1, '小型汽车', 7, NULL, 'B1', '渝A001', b'1');
+INSERT INTO `tbl_car` VALUES (2, '货车', 30, NULL, 'B2', '渝A002', b'1');
+INSERT INTO `tbl_car` VALUES (3, '小型汽车', 50, NULL, 'B1', '渝A003', b'1');
+INSERT INTO `tbl_car` VALUES (4, '卡车', 35, NULL, 'C1', '渝A004', b'1');
+INSERT INTO `tbl_car` VALUES (5, '卡车', 40, NULL, 'B1', '渝A005', b'1');
+INSERT INTO `tbl_car` VALUES (6, '小型汽车', 40, NULL, 'B2', '渝A006', b'1');
+INSERT INTO `tbl_car` VALUES (7, '货车', 55, NULL, 'B1', '渝A007', b'0');
+INSERT INTO `tbl_car` VALUES (8, '卡车', 15, NULL, 'C1', '渝A008', b'1');
+INSERT INTO `tbl_car` VALUES (9, '小型汽车', 65, NULL, 'C1', '渝A009', b'1');
+INSERT INTO `tbl_car` VALUES (10, '货车', 70, NULL, 'C1', '桂R001', b'0');
 
 -- ----------------------------
 -- Table structure for tbl_check
