@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 27/06/2022 17:42:13
+ Date: 28/06/2022 09:17:03
 */
 
 SET NAMES utf8mb4;
@@ -29,13 +29,14 @@ CREATE TABLE `tbl_announce`  (
   `a_time` datetime(0) NOT NULL,
   `a_valid` bit(1) NOT NULL,
   PRIMARY KEY (`a_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10001 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_announce
 -- ----------------------------
 INSERT INTO `tbl_announce` VALUES (10001, '需求分析结束了', '遭数据库数据好烦', 'czr', '2022-06-23 16:25:25', b'1');
-INSERT INTO `tbl_announce` VALUES (10003, '标题2', '这是一条公告', 'Haoting', '2022-06-26 08:25:25', b'1');
+INSERT INTO `tbl_announce` VALUES (10003, '标题2', '这是一条公告', 'Haoting', '2022-06-26 08:25:25', b'0');
+INSERT INTO `tbl_announce` VALUES (10004, '标题4', '这是一条普通的公告', 'Haoting', '2022-06-26 08:25:25', b'1');
 
 -- ----------------------------
 -- Table structure for tbl_car
@@ -80,12 +81,13 @@ CREATE TABLE `tbl_check`  (
   PRIMARY KEY (`ch_id`) USING BTREE,
   INDEX `c_id`(`c_id`) USING BTREE,
   CONSTRAINT `tbl_check_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `tbl_car` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_check
 -- ----------------------------
 INSERT INTO `tbl_check` VALUES (1, 1, '爆胎', '2022-06-23 16:25:25', '修好了!', b'1');
+INSERT INTO `tbl_check` VALUES (2, 6, '车玻璃损坏', '2022-06-28 08:41:30', '修好了一半', b'1');
 
 -- ----------------------------
 -- Table structure for tbl_firm
@@ -101,7 +103,7 @@ CREATE TABLE `tbl_firm`  (
   `f_date` datetime(0) NOT NULL,
   `f_valid` bit(1) NOT NULL,
   PRIMARY KEY (`f_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_firm
@@ -124,7 +126,7 @@ CREATE TABLE `tbl_goods`  (
   PRIMARY KEY (`g_id`) USING BTREE,
   INDEX `w_id`(`w_id`) USING BTREE,
   CONSTRAINT `tbl_goods_ibfk_1` FOREIGN KEY (`w_id`) REFERENCES `tbl_warehouse` (`w_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_goods
@@ -155,7 +157,7 @@ CREATE TABLE `tbl_material`  (
   PRIMARY KEY (`m_id`) USING BTREE,
   INDEX `w_id`(`w_id`) USING BTREE,
   CONSTRAINT `tbl_material_ibfk_1` FOREIGN KEY (`w_id`) REFERENCES `tbl_warehouse` (`w_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_material
@@ -189,7 +191,7 @@ CREATE TABLE `tbl_order`  (
   CONSTRAINT `tbl_order_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `tbl_user` (`u_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tbl_order_ibfk_2` FOREIGN KEY (`g_id`) REFERENCES `tbl_goods` (`g_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tbl_order_ibfk_3` FOREIGN KEY (`c_id`) REFERENCES `tbl_car` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_order
@@ -213,7 +215,7 @@ CREATE TABLE `tbl_role`  (
   `r_info` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `r_valid` bit(1) NOT NULL,
   PRIMARY KEY (`r_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_role
@@ -239,7 +241,7 @@ CREATE TABLE `tbl_user`  (
   UNIQUE INDEX `u_account`(`u_account`) USING BTREE,
   INDEX `r_id`(`r_id`) USING BTREE,
   CONSTRAINT `tbl_user_ibfk_1` FOREIGN KEY (`r_id`) REFERENCES `tbl_role` (`r_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_user
@@ -264,7 +266,7 @@ CREATE TABLE `tbl_warehouse`  (
   PRIMARY KEY (`w_id`) USING BTREE,
   INDEX `f_id`(`f_id`) USING BTREE,
   CONSTRAINT `tbl_warehouse_ibfk_1` FOREIGN KEY (`f_id`) REFERENCES `tbl_firm` (`f_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_warehouse
