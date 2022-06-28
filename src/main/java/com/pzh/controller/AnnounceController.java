@@ -40,6 +40,7 @@ public class AnnounceController {
         // 根据发布者查
         announceLambdaQueryWrapper.eq((announce.getPublisher()!=null) && (!announce.getPublisher().equals("")),
                                                 Announce::getPublisher, announce.getPublisher());
+        announceLambdaQueryWrapper.orderByDesc(Announce::getTime);
         return new R(true, announceServiceImpl.list(announceLambdaQueryWrapper));
     }
 
