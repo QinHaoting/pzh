@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 28/06/2022 09:59:24
+ Date: 28/06/2022 11:02:53
 */
 
 SET NAMES utf8mb4;
@@ -88,6 +88,22 @@ CREATE TABLE `tbl_check`  (
 -- ----------------------------
 INSERT INTO `tbl_check` VALUES (1, 1, '爆胎', '2022-06-23 16:25:25', '修好了!', b'1');
 INSERT INTO `tbl_check` VALUES (2, 6, '车玻璃损坏', '2022-06-28 08:41:30', '修好了一半', b'1');
+
+-- ----------------------------
+-- Table structure for tbl_feedback
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_feedback`;
+CREATE TABLE `tbl_feedback`  (
+  `fb_id` int NOT NULL AUTO_INCREMENT,
+  `fb_content` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `fb_status` int NOT NULL,
+  PRIMARY KEY (`fb_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tbl_feedback
+-- ----------------------------
+INSERT INTO `tbl_feedback` VALUES (1, '反馈1', 1);
 
 -- ----------------------------
 -- Table structure for tbl_firm
