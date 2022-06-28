@@ -23,9 +23,6 @@ public class OrderController {
 
     //------------------查询-----------------------
     @ApiOperation(value = "查询订单", notes = "根据输入条件进行订单查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "order", value = "输入的查询条件（json对象）", dataTypeClass = Order.class, required = true)
-    })
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getOrderByCondition(@RequestBody Order order) {
         LambdaQueryWrapper<Order> orderLambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -57,9 +54,6 @@ public class OrderController {
 
     //------------------添加-----------------------
     @ApiOperation(value = "添加订单", notes = "根据订单信息进行订单添加")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "order", value = "输入的角色信息（json对象）", dataTypeClass = Order.class, required = true)
-    })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addOrder(@RequestBody Order order) {
         order.setValid(true); // 启用有效位
@@ -69,9 +63,6 @@ public class OrderController {
 
     //------------------更新-----------------------
     @ApiOperation(value = "修改订单", notes = "根据订单编号ID修改订单信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "order", value = "订单信息", dataTypeClass = Order.class, required = true)
-    })
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R updateOrder(@RequestBody Order order) {
         return new R(orderServiceImpl.updateById(order));

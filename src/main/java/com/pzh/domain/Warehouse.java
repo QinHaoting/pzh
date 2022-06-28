@@ -18,7 +18,7 @@ public class Warehouse implements Serializable {
     @TableId(value = "w_id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value="外键：公司编号", name="firm_id", example = "1")
+    @ApiModelProperty(value="外键：公司编号", name="firm_id", required=true, example = "1")
     @TableField(value = "f_id")
     private Integer firm_id;
 

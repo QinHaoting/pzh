@@ -23,11 +23,8 @@ public class GoodsController {
 
     //------------------查询-----------------------
     @ApiOperation(value = "查询货物", notes = "根据输入条件进行货物查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "goods", value = "输入的查询条件（json对象）", dataTypeClass = Goods.class, required = true)
-    })
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public R getRoleByCondition(@RequestBody Goods goods) {
+    public R getGoodsByCondition(@RequestBody Goods goods) {
         LambdaQueryWrapper<Goods> goodsLambdaQueryWrapper = new LambdaQueryWrapper<>();
         // 筛选出有效的货物
         goodsLambdaQueryWrapper.eq(true, Goods::getValid, true);
@@ -51,22 +48,16 @@ public class GoodsController {
 
     //------------------添加-----------------------
     @ApiOperation(value = "添加货物", notes = "根据货物信息进行货物添加")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "goods", value = "输入的货物信息（json对象）", dataTypeClass = Goods.class, required = true)
-    })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public R addRole(@RequestBody Goods goods) {
+    public R addGoods(@RequestBody Goods goods) {
         goods.setValid(true); // 将有效位启用
         return new R(goodsServiceImpl.save(goods));
     }
 
     //------------------修改-----------------------
     @ApiOperation(value = "修改货物", notes = "根据货物编号ID修改货物信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "goods", value = "货物信息", dataTypeClass = Goods.class, required = true)
-    })
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public R updateRole(@RequestBody Goods goods) {
+    public R updateGoods(@RequestBody Goods goods) {
         return new R(goodsServiceImpl.updateById(goods));
     }
 
@@ -76,7 +67,7 @@ public class GoodsController {
             @ApiImplicitParam(name = "id", value = "货物编号", dataTypeClass = Integer.class, required = true)
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public R deleteRole(Integer id) {
+    public R deleteGoods(Integer id) {
         Goods goods = goodsServiceImpl.getById(id);
         goods.setValid(false); // 有效位设为失效
         return new R(goodsServiceImpl.updateById(goods));

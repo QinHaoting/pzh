@@ -23,9 +23,6 @@ public class RoleController {
 
     //------------------查询-----------------------
     @ApiOperation(value = "查询角色", notes = "根据输入条件进行角色查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "role", value = "输入的查询条件（json对象）", dataTypeClass = Role.class, required = true)
-    })
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getRoleByCondition(@RequestBody Role role) {
         LambdaQueryWrapper<Role> roleLambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -42,9 +39,6 @@ public class RoleController {
 
     //------------------添加-----------------------
     @ApiOperation(value = "添加角色", notes = "根据角色信息进行角色添加")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "role", value = "输入的角色信息（json对象），只需传角色名称", dataTypeClass = Role.class, required = true)
-    })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addRole(@RequestBody Role role) {
         role.setValid(true); // 将角色启用
@@ -53,9 +47,6 @@ public class RoleController {
 
     //------------------修改-----------------------
     @ApiOperation(value = "修改角色", notes = "根据角色编号ID修改角色信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "role", value = "角色信息", dataTypeClass = Role.class, required = true)
-    })
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R updateRole(@RequestBody Role role) {
         return new R(roleServiceImpl.updateById(role));

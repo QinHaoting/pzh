@@ -30,9 +30,6 @@ public class UserController {
 
     //------------------查询-----------------------
     @ApiOperation(value = "查询用户", notes = "根据输入条件进行用户查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "user", value = "输入的查询条件（json对象）", dataTypeClass = User.class, required = true)
-    })
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getUserByCondition(@RequestBody User user) {
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -69,9 +66,6 @@ public class UserController {
 
     //------------------添加-----------------------
     @ApiOperation(value = "添加用户", notes = "根据用户填写的信息添加用户")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "user", value = "输入的用户信息（json对象）", dataTypeClass = User.class, required = true)
-    })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addUser(@RequestBody User user) {
         if (user.getRole_id()!=null || user.getRole_id() != 1) {
@@ -91,9 +85,6 @@ public class UserController {
 
     //------------------更新-----------------------
     @ApiOperation(value = "修改用户信息", notes = "根据用户编号ID修改用户信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "user", value = "输入的用户信息（json对象）", dataTypeClass = User.class, required = true)
-    })
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R updateUser(@RequestBody User user) {
         return new R(true, userServiceImpl.updateById(user));

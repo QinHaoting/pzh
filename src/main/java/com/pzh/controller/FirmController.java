@@ -23,11 +23,8 @@ public class FirmController {
 
     //------------------查询-----------------------
     @ApiOperation(value = "查询公司", notes = "根据输入条件进行公司查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "firm", value = "输入的查询条件（json对象）", dataTypeClass = Firm.class, required = true)
-    })
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public R getUserByCondition(@RequestBody Firm firm) {
+    public R getFirmByCondition(@RequestBody Firm firm) {
         LambdaQueryWrapper<Firm> firmLambdaQueryWrapper = new LambdaQueryWrapper<>();
         // 筛选出有效的公司
         firmLambdaQueryWrapper.eq(true, Firm::getValid, true);
@@ -49,11 +46,8 @@ public class FirmController {
 
     //------------------添加-----------------------
     @ApiOperation(value = "添加公司", notes = "根据输入的公司信息添加公司")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "firm", value = "输入的公司信息（json对象）", dataTypeClass = Firm.class, required = true)
-    })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public R addUser(@RequestBody Firm firm) {
+    public R addFirm(@RequestBody Firm firm) {
         firm.setValid(true); // 启用有效位
         return new R(true, firmServiceImpl.save(firm));
     }
@@ -61,11 +55,8 @@ public class FirmController {
 
     //------------------更新-----------------------
     @ApiOperation(value = "修改公司", notes = "根据公司编号修改公司信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "firm", value = "输入的公司信息（json对象）", dataTypeClass = Firm.class, required = true)
-    })
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public R updateUser(@RequestBody Firm firm) {
+    public R updateFirm(@RequestBody Firm firm) {
         return new R(true, firmServiceImpl.updateById(firm));
     }
 
@@ -75,7 +66,7 @@ public class FirmController {
             @ApiImplicitParam(name = "id", value = "公司编号", dataTypeClass = Integer.class, required = true)
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public R deleteUserByID(Integer id) {
+    public R deleteFirmByID(Integer id) {
         Firm firm = firmServiceImpl.getById(id);
         firm.setValid(false); // 有效位设为失效
         return new R(true, firmServiceImpl.updateById(firm));

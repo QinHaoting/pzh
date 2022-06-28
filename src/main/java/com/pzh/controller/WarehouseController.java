@@ -23,9 +23,6 @@ public class WarehouseController {
 
     //------------------查询-----------------------
     @ApiOperation(value = "查询仓库", notes = "根据输入条件进行仓库查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "warehouse", value = "输入的查询条件（json对象）", dataTypeClass = Warehouse.class, required = true)
-    })
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getWarehouseByCondition(@RequestBody Warehouse warehouse) {
         LambdaQueryWrapper<Warehouse> warehouseLambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -46,9 +43,6 @@ public class WarehouseController {
 
     //------------------添加-----------------------
     @ApiOperation(value = "添加仓库", notes = "根据仓库信息添加仓库")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "warehouse", value = "输入的仓库信息（json对象）", dataTypeClass = Warehouse.class, required = true)
-    })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addOrder(@RequestBody Warehouse warehouse) {
         warehouse.setValid(true); // 将仓库启用
@@ -58,9 +52,6 @@ public class WarehouseController {
 
     //------------------更新-----------------------
     @ApiOperation(value = "修改仓库", notes = "根据仓库编号ID修改仓库信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "warehouse", value = "输入的仓库信息（json对象）", dataTypeClass = Warehouse.class, required = true)
-    })
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R updateWarehouse(@RequestBody Warehouse warehouse) {
         return new R(warehouseServiceImpl.updateById(warehouse));

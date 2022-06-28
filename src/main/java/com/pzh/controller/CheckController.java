@@ -23,11 +23,8 @@ public class CheckController {
 
     //------------------查询-----------------------
     @ApiOperation(value = "查询车辆维修记录", notes = "根据输入条件进行车辆维修记录查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "check", value = "输入的查询条件（json对象）", dataTypeClass = Check.class, required = true)
-    })
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public R getRoleByCondition(@RequestBody Check check) {
+    public R getCheckByCondition(@RequestBody Check check) {
         LambdaQueryWrapper<Check> checkLambdaQueryWrapper = new LambdaQueryWrapper<>();
         // 筛选出有效的车辆维修记录
         checkLambdaQueryWrapper.eq(true, Check::getValid, true);
@@ -48,22 +45,16 @@ public class CheckController {
 
     //------------------添加-----------------------
     @ApiOperation(value = "添加车辆维修记录", notes = "根据车辆维修信息进行车辆维修记录添加")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "check", value = "输入的车辆维修信息（json对象）", dataTypeClass = Check.class, required = true)
-    })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public R addRole(@RequestBody Check check) {
+    public R addCheck(@RequestBody Check check) {
         check.setValid(true); // 启用有效位
         return new R(checkServiceImpl.save(check));
     }
 
     //------------------修改-----------------------
     @ApiOperation(value = "修改车辆维修记录", notes = "根据车辆维修记录ID修改车辆维修信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "check", value = "车辆维修信息", dataTypeClass = Check.class, required = true)
-    })
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public R updateRole(@RequestBody Check check) {
+    public R updateCheck(@RequestBody Check check) {
         return new R(checkServiceImpl.updateById(check));
     }
 
@@ -73,7 +64,7 @@ public class CheckController {
             @ApiImplicitParam(name = "id", value = "车辆维修记录编号", dataTypeClass = Integer.class, required = true)
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public R deleteRole(Integer id) {
+    public R deleteCheck(Integer id) {
         Check check = checkServiceImpl.getById(id);
         check.setValid(false); // 有效位设为失效
         return new R(checkServiceImpl.updateById(check));

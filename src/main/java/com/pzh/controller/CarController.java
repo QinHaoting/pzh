@@ -23,11 +23,8 @@ public class CarController {
 
     //------------------查询-----------------------
     @ApiOperation(value = "查询车辆", notes = "根据输入条件进行车辆查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "car", value = "输入的查询条件（json对象）", dataTypeClass = Car.class, required = true)
-    })
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public R getRoleByCondition(@RequestBody Car car) {
+    public R getCarByCondition(@RequestBody Car car) {
         LambdaQueryWrapper<Car> carLambdaQueryWrapper = new LambdaQueryWrapper<>();
         // 筛选出有效的车辆
         carLambdaQueryWrapper.eq(true, Car::getValid, true);
@@ -48,11 +45,8 @@ public class CarController {
 
     //------------------添加-----------------------
     @ApiOperation(value = "添加车辆", notes = "根据车辆信息进行车辆添加")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "car", value = "输入的车辆信息（json对象）", dataTypeClass = Car.class, required = true)
-    })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public R addRole(@RequestBody Car car) {
+    public R addCar(@RequestBody Car car) {
         LambdaQueryWrapper<Car> carLambdaQueryWrapper = new LambdaQueryWrapper<>();
         carLambdaQueryWrapper.eq((car.getNumber()!=null) && (!car.getNumber().equals("")),
                                             Car::getNumber, car.getNumber());
@@ -65,11 +59,8 @@ public class CarController {
 
     //------------------修改-----------------------
     @ApiOperation(value = "修改车辆", notes = "根据车辆编号ID修改车辆信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "car", value = "车辆信息", dataTypeClass = Car.class, required = true)
-    })
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public R updateRole(@RequestBody Car car) {
+    public R updateCar(@RequestBody Car car) {
         return new R(carServiceImpl.updateById(car));
     }
 
@@ -79,7 +70,7 @@ public class CarController {
             @ApiImplicitParam(name = "id", value = "车辆编号", dataTypeClass = Integer.class, required = true)
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public R deleteRole(Integer id) {
+    public R deleteCar(Integer id) {
         Car car = carServiceImpl.getById(id);
         car.setValid(false); // 有效位设为失效
         return new R(carServiceImpl.updateById(car));

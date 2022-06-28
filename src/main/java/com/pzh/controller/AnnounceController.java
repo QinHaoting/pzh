@@ -23,11 +23,8 @@ public class AnnounceController {
 
     //------------------查询-----------------------
     @ApiOperation(value = "查询公告", notes = "根据输入条件进行公告查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "announce", value = "输入的查询条件（json对象）", dataTypeClass = Announce.class, required = true)
-    })
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public R getRoleByCondition(@RequestBody Announce announce) {
+    public R getAnnounceByCondition(@RequestBody Announce announce) {
         LambdaQueryWrapper<Announce> announceLambdaQueryWrapper = new LambdaQueryWrapper<>();
         // 筛选出有效的公告
         announceLambdaQueryWrapper.eq(true, Announce::getValid, true);
@@ -46,22 +43,16 @@ public class AnnounceController {
 
     //------------------添加-----------------------
     @ApiOperation(value = "添加公告", notes = "根据公告信息进行公告添加")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "announce", value = "输入的公告信息（json对象）", dataTypeClass = Announce.class, required = true)
-    })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public R addRole(@RequestBody Announce announce) {
+    public R addAnnounce(@RequestBody Announce announce) {
         announce.setValid(true); // 启用有效位
         return new R(announceServiceImpl.save(announce));
     }
 
     //------------------修改-----------------------
     @ApiOperation(value = "修改公告", notes = "根据公告编号ID修改公告信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "announce", value = "公告信息", dataTypeClass = Announce.class, required = true)
-    })
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public R updateRole(@RequestBody Announce announce) {
+    public R updateAnnounce(@RequestBody Announce announce) {
         return new R(announceServiceImpl.updateById(announce));
     }
 
@@ -71,7 +62,7 @@ public class AnnounceController {
             @ApiImplicitParam(name = "id", value = "公告编号", dataTypeClass = Integer.class, required = true)
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public R deleteRole(Integer id) {
+    public R deleteAnnounce(Integer id) {
         Announce announce = announceServiceImpl.getById(id);
         announce.setValid(false); // 有效位设为失效
         return new R(announceServiceImpl.updateById(announce));

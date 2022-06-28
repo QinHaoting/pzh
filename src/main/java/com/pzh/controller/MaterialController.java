@@ -23,11 +23,8 @@ public class MaterialController {
 
     //------------------查询-----------------------
     @ApiOperation(value = "查询物资", notes = "根据输入条件进行物资查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "material", value = "输入的查询条件（json对象）", dataTypeClass = Material.class, required = true)
-    })
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public R getRoleByCondition(@RequestBody Material material) {
+    public R getMaterialByCondition(@RequestBody Material material) {
         LambdaQueryWrapper<Material> materialLambdaQueryWrapper = new LambdaQueryWrapper<>();
         // 筛选出有效的物资
         materialLambdaQueryWrapper.eq(true, Material::getValid, true);
@@ -45,22 +42,16 @@ public class MaterialController {
 
     //------------------添加-----------------------
     @ApiOperation(value = "添加物资", notes = "根据物资信息进行物资添加")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "material", value = "输入的物资信息（json对象）", dataTypeClass = Material.class, required = true)
-    })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public R addRole(@RequestBody Material material) {
+    public R addMaterial(@RequestBody Material material) {
         material.setValid(true); // 启用有效位
         return new R(materialServiceImpl.save(material));
     }
 
     //------------------修改-----------------------
     @ApiOperation(value = "修改物资", notes = "根据物资编号ID修改物资信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "material", value = "物资信息", dataTypeClass = Material.class, required = true)
-    })
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public R updateRole(@RequestBody Material material) {
+    public R updateMaterial(@RequestBody Material material) {
         return new R(materialServiceImpl.updateById(material));
     }
 
@@ -70,7 +61,7 @@ public class MaterialController {
             @ApiImplicitParam(name = "id", value = "物资编号", dataTypeClass = Integer.class, required = true)
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public R deleteRole(Integer id) {
+    public R deleteMaterial(Integer id) {
         Material material = materialServiceImpl.getById(id);
         material.setValid(false); // 有效位设为失效
         return new R(materialServiceImpl.updateById(material));
