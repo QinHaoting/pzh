@@ -11,12 +11,10 @@ public class R {
     @ApiModelProperty(value="操作标志位", name="flag", required=true, example = "true")
     private boolean flag;
 
-    @ApiModelProperty(value="本次操作返回的数据", name="data", required=true,
-            example = "{ 'id': 1, 'name': '系统管理员'}")
+    @ApiModelProperty(value="本次操作返回的数据", name="data", required=true)
     private Object data;
 
-    @ApiModelProperty(value="本次操作的信息", name="message", required=true,
-            example = "编号已存在")
+    @ApiModelProperty(value="本次操作的信息", name="message", required=true)
     private String message;
 
     public R(boolean flag, Object data, String message) {
