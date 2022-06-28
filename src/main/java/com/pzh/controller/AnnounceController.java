@@ -29,6 +29,8 @@ public class AnnounceController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getRoleByCondition(@RequestBody Announce announce) {
         LambdaQueryWrapper<Announce> announceLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 筛选出有效的公告
+        announceLambdaQueryWrapper.eq(true, Announce::getValid, true);
         // 根据公告编号查
         announceLambdaQueryWrapper.eq((announce.getId()!=null) && (announce.getId()>=0),
                                                 Announce::getId, announce.getId());
@@ -48,6 +50,7 @@ public class AnnounceController {
     })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addRole(@RequestBody Announce announce) {
+        announce.setValid(true); // 启用有效位
         return new R(announceServiceImpl.save(announce));
     }
 
@@ -68,6 +71,8 @@ public class AnnounceController {
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public R deleteRole(Integer id) {
-        return new R(announceServiceImpl.removeById(id));
+        Announce announce = announceServiceImpl.getById(id);
+        announce.setValid(false); // 有效位设为失效
+        return new R(announceServiceImpl.updateById(announce));
     }
 }

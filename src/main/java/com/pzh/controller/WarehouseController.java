@@ -2,8 +2,8 @@ package com.pzh.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pzh.domain.Warehouse;
-import com.pzh.util.R;
 import com.pzh.service.impl.WarehouseServiceImpl;
+import com.pzh.util.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

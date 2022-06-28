@@ -32,8 +32,11 @@ public class Check {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date time;
 
-
     @ApiModelProperty(value="维修结果", name="result", required=true, example = "修好了")
     @TableField(value = "ch_result")
     private String result;
+
+    @ApiModelProperty(value="有效位", name="valid", required=true, example = "1")
+    @TableField(value = "ch_valid")
+    private Boolean valid;
 }

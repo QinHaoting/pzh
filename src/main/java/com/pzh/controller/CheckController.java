@@ -29,6 +29,8 @@ public class CheckController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getRoleByCondition(@RequestBody Check check) {
         LambdaQueryWrapper<Check> checkLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        // 筛选出有效的车辆维修记录
+        checkLambdaQueryWrapper.eq(true, Check::getValid, true);
         // 根据车辆维修记录编号查
         checkLambdaQueryWrapper.eq((check.getId()!=null) && (check.getId()>=0),
                                                 Check::getId, check.getId());
@@ -51,6 +53,7 @@ public class CheckController {
     })
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addRole(@RequestBody Check check) {
+        check.setValid(true); // 启用有效位
         return new R(checkServiceImpl.save(check));
     }
 
@@ -71,6 +74,8 @@ public class CheckController {
     })
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public R deleteRole(Integer id) {
-        return new R(checkServiceImpl.removeById(id));
+        Check check = checkServiceImpl.getById(id);
+        check.setValid(false); // 有效位设为失效
+        return new R(checkServiceImpl.updateById(check));
     }
 }

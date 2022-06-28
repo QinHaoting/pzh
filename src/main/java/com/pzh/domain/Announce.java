@@ -35,4 +35,8 @@ public class Announce {
     @TableField(value = "a_time")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date time;
+
+    @ApiModelProperty(value="有效位", name="valid", required=true, example = "1")
+    @TableField(value = "a_valid")
+    private Boolean valid;
 }
