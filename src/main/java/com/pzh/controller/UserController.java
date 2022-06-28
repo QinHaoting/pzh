@@ -1,7 +1,9 @@
 package com.pzh.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.pzh.domain.Role;
 import com.pzh.domain.User;
+import com.pzh.service.impl.RoleServiceImpl;
 import com.pzh.service.impl.UserServiceImpl;
 import com.pzh.util.R;
 import io.swagger.annotations.Api;
@@ -14,12 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Api(tags = "用户控制器")
 @RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserServiceImpl userServiceImpl;
+
+    @Autowired
+    private RoleServiceImpl roleServiceImpl;
 
     //------------------查询-----------------------
     @ApiOperation(value = "查询用户", notes = "根据输入条件进行用户查询")
@@ -49,7 +56,14 @@ public class UserController {
         // 根据邮箱查
         userLambdaQueryWrapper.eq((user.getEmail()!=null) && (!user.getEmail().equals("")),
                                             User::getEmail, user.getEmail());
-        return new R(true, userServiceImpl.list(userLambdaQueryWrapper));
+        // 设置角色名称
+        List<User> userList = userServiceImpl.list(userLambdaQueryWrapper);
+        for (User userTemp: userList) {
+            Integer role_id = userTemp.getRole_id();
+            Role role = roleServiceImpl.getById(role_id);
+            userTemp.setRole_name(role.getName());
+        }
+        return new R(true, userList);
     }
 
 

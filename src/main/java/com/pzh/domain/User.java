@@ -26,6 +26,10 @@ public class User implements Serializable {
     @TableField(value = "r_id")
     private Integer role_id;
 
+    @ApiModelProperty(value="角色名称", name="role_name", example = "系统管理员")
+    @TableField(exist = false)
+    private String role_name;
+
     @ApiModelProperty(value="密码", name="password", required=true, example = "123456")
     @TableField(value = "u_password")
     private String password;
