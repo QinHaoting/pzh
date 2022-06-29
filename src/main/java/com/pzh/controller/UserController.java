@@ -11,11 +11,14 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 
 @Api(tags = "用户控制器")
@@ -78,6 +81,8 @@ public class UserController {
         if (userServiceImpl.getOne(userLambdaQueryWrapper) != null) {
             return new R(false, null, "用户账号已被注册");
         }
+        String password = Arrays.toString(DigestUtils.md5Digest(user.getPassword().getBytes(StandardCharsets.UTF_8)));
+        user.setPassword(password); // MD5加密
         user.setValid(true); // 将用户启用
         return new R(true, userServiceImpl.save(user), "用户注册成功");
     }
@@ -87,6 +92,8 @@ public class UserController {
     @ApiOperation(value = "修改用户信息", notes = "根据用户编号ID修改用户信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R updateUser(@RequestBody User user) {
+        String password = Arrays.toString(DigestUtils.md5Digest(user.getPassword().getBytes(StandardCharsets.UTF_8)));
+        user.setPassword(password); // MD5加密
         return new R(true, userServiceImpl.updateById(user));
     }
 
