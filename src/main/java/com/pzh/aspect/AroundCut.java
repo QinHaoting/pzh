@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 @Aspect
 public class AroundCut {
     public static final String POINT_CUT = "execution(* com.pzh.controller..*.*(..)) && " +
-            "!execution(* com.pzh.controller.LoginController.*(..)) "; // 排除登录
+            "!execution(* com.pzh.controller.LoginController.login(..)) "; // 排除登录
 
 
     @Around(AroundCut.POINT_CUT)
