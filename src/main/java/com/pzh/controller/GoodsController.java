@@ -51,7 +51,7 @@ public class GoodsController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public R addGoods(@RequestBody Goods goods) {
         goods.setValid(true); // 将有效位启用
-        return new R(goodsServiceImpl.save(goods));
+        return new R(goodsServiceImpl.save(goods), goods);
     }
 
     //------------------修改-----------------------
