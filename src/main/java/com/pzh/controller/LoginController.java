@@ -50,10 +50,14 @@ public class LoginController {
             Role role = roleServiceImpl.getById(loginUser.getRole_id());
             userInfo.setRole_name(role.getName());
 
-            // 3.将用户数据放入session
+            userInfo.setPhone(loginUser.getPhone());
+            userInfo.setEmail(loginUser.getEmail());
+            userInfo.setName(loginUser.getName());
+
+            // 将用户数据放入session
             session.setAttribute("userInfo", userInfo);
-            // 4.设置session过期时间
-            session.setMaxInactiveInterval(20 * 60);
+            // 设置session过期时间
+            session.setMaxInactiveInterval(60 * 60); // 60分钟过期
             return new R(true, null, "登录成功");
         }
         return new R(false, null, "密码不正确");
