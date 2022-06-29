@@ -40,13 +40,9 @@ public class LoginController {
         if (user.getPassword() == null || user.getPassword().equals("")) {
             return new R(false, null, "密码为空");
         }
-        String userPassword = Arrays.toString(DigestUtils.md5Digest(user.getPassword().getBytes(StandardCharsets.UTF_8)));
-        String loginUserPassword = Arrays.toString(DigestUtils.md5Digest(loginUser.getPassword().getBytes(StandardCharsets.UTF_8)));
-//        System.out.println();
-//        System.out.println(pwd);
-//        byte[]
-
-        if (userPassword.equals(loginUserPassword)) { // 正常登入
+        // 对输入的密码加密
+        String userPassword = new String(DigestUtils.md5Digest(user.getPassword().getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+        if (loginUser.getPassword().equals(userPassword)) { // 正常登入
             User userInfo = new User();
             // 返回用户账号
             userInfo.setAccount(loginUser.getAccount());
