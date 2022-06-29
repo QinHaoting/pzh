@@ -55,7 +55,7 @@
 			<version>1.2.6</version>
 		</dependency>
 
-		<!--    swagger相关   -->
+		<!--swagger相关-->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-boot-starter</artifactId>
@@ -65,6 +65,12 @@
 			<groupId>com.github.xiaoymin</groupId>
 			<artifactId>knife4j-spring-boot-starter</artifactId>
 			<version>3.0.3</version>
+		</dependency>
+
+		<!--拦截器相关-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 	</dependencies>
 
