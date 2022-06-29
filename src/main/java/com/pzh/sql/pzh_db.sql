@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 28/06/2022 19:51:43
+ Date: 29/06/2022 11:56:52
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `tbl_announce`  (
   `a_time` datetime(0) NOT NULL,
   `a_valid` bit(1) NOT NULL,
   PRIMARY KEY (`a_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10004 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_announce
@@ -81,7 +81,7 @@ CREATE TABLE `tbl_check`  (
   PRIMARY KEY (`ch_id`) USING BTREE,
   INDEX `c_id`(`c_id`) USING BTREE,
   CONSTRAINT `tbl_check_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `tbl_car` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_check
@@ -98,7 +98,7 @@ CREATE TABLE `tbl_feedback`  (
   `fb_content` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `fb_status` int NOT NULL,
   PRIMARY KEY (`fb_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tbl_feedback
@@ -262,12 +262,13 @@ CREATE TABLE `tbl_user`  (
 -- ----------------------------
 -- Records of tbl_user
 -- ----------------------------
-INSERT INTO `tbl_user` VALUES (1, '123', 1, '123456', NULL, NULL, '宝儿姐', b'1');
-INSERT INTO `tbl_user` VALUES (4, '444', 2, '000000', NULL, NULL, '浩廷是爹', b'1');
-INSERT INTO `tbl_user` VALUES (5, '456', 2, '123456', NULL, NULL, 'iii', b'0');
-INSERT INTO `tbl_user` VALUES (8, '8888', 2, '123456', '10089', '123123@qq.com', '憨憨', b'0');
-INSERT INTO `tbl_user` VALUES (13, 'abc0000', 2, '123456', NULL, NULL, 'Haoting', b'1');
-INSERT INTO `tbl_user` VALUES (14, '9090', 2, '123456', NULL, NULL, 'Haoting', b'1');
+INSERT INTO `tbl_user` VALUES (1, '123', 1, '�\n�9I�Y��V�W��>', NULL, NULL, '宝儿姐', b'1');
+INSERT INTO `tbl_user` VALUES (4, '444', 2, '�\n�9I�Y��V�W��>', NULL, NULL, '浩廷是爹', b'1');
+INSERT INTO `tbl_user` VALUES (5, '456', 2, '�\n�9I�Y��V�W��>', NULL, NULL, 'iii', b'0');
+INSERT INTO `tbl_user` VALUES (8, '8888', 2, '�\n�9I�Y��V�W��>', '10089', '123123@qq.com', '憨憨', b'0');
+INSERT INTO `tbl_user` VALUES (13, 'abc0000', 2, '�\n�9I�Y��V�W��>', NULL, NULL, 'Haoting', b'1');
+INSERT INTO `tbl_user` VALUES (14, '9090', 2, '�\n�9I�Y��V�W��>', NULL, NULL, 'Haoting', b'1');
+INSERT INTO `tbl_user` VALUES (17, 'HHH', 2, '�\n�9I�Y��V�W��>', NULL, NULL, 'Haoting', b'1');
 
 -- ----------------------------
 -- Table structure for tbl_warehouse
