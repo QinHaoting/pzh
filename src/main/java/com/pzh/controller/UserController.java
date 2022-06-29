@@ -42,7 +42,7 @@ public class UserController {
         userLambdaQueryWrapper.eq((user.getAccount()!=null) && (!user.getAccount().equals("")),
                                             User::getAccount, user.getAccount());
         // 根据用户名查
-        userLambdaQueryWrapper.eq((user.getName()!=null) && (!user.getName().equals("")),
+        userLambdaQueryWrapper.like((user.getName()!=null) && (!user.getName().equals("")),
                                             User::getName, user.getName());
         // 根据角色编号查
         userLambdaQueryWrapper.eq((user.getRole_id()!=null) && (user.getRole_id()>=0),
