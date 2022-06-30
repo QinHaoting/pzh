@@ -30,9 +30,9 @@ public class LoginController {
     public R login(@RequestBody User user, HttpSession session){
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
         userLambdaQueryWrapper.eq(true, User::getAccount, user.getAccount());
-        // 1.查询用户是否存在
+        // 查询用户是否存在
         User loginUser = userServiceImpl.getOne(userLambdaQueryWrapper);
-        if(loginUser == null){//用户不存在
+        if(loginUser == null){ // 用户不存在
             return new R(false, null, "用户不存在");
         }
         if (user.getPassword() == null || user.getPassword().equals("")) {
@@ -56,8 +56,6 @@ public class LoginController {
             session.setAttribute("userInfo", userInfo);
             // 设置session过期时间
             session.setMaxInactiveInterval(60 * 60); // 60分钟过期
-
-            System.out.println(session);
             return new R(true, userInfo, "登录成功");
         }
         return new R(false, null, "密码不正确");
