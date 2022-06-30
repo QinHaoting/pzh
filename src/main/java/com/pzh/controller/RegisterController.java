@@ -7,6 +7,7 @@ import com.pzh.service.impl.RoleServiceImpl;
 import com.pzh.service.impl.UserServiceImpl;
 import com.pzh.util.R;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,7 @@ public class RegisterController {
      * @param user 用户账号
      * @return 用户账号是否被注册
      */
+    @Transactional
     @PostMapping("/registerCheck")
     public R userAccountCheck(@RequestBody User user){
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -41,6 +43,7 @@ public class RegisterController {
         return new R(true, null, "用户账号可用");
     }
 
+    @Transactional
     @PostMapping("/register")
     public R register(@RequestBody User user, HttpSession session){
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();

@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ public class AnnounceController {
     private AnnounceServiceImpl announceServiceImpl;
 
     //------------------查询-----------------------
+    @Transactional
     @ApiOperation(value = "查询公告", notes = "根据输入条件进行公告查询")
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R getAnnounceByCondition(@RequestBody Announce announce) {
