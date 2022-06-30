@@ -49,6 +49,7 @@ public class LoginController {
             userInfo.setRole_id(role.getId());
             userInfo.setRole_name(role.getName());
             // 返回用户信息
+            userInfo.setId(loginUser.getId());
             userInfo.setPhone(loginUser.getPhone());
             userInfo.setEmail(loginUser.getEmail());
             userInfo.setName(loginUser.getName());

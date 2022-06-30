@@ -69,7 +69,6 @@ public class RegisterController {
             user.setRole_id(role.getId());
             user.setRole_name(role.getName());
             // 以下信息不传
-            user.setId(null);
             user.setPassword(null); // 不传密码
             user.setValid(null);
 
