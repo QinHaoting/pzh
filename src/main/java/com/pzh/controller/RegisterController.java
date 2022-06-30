@@ -6,12 +6,13 @@ import com.pzh.domain.User;
 import com.pzh.service.impl.RoleServiceImpl;
 import com.pzh.service.impl.UserServiceImpl;
 import com.pzh.util.R;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.nio.charset.StandardCharsets;
@@ -27,14 +28,21 @@ public class RegisterController {
 
     /**
      * 用户账号检查
-     * @param user 用户账号
+     * @param account 用户账号
      * @return 用户账号是否被注册
      */
     @Transactional
-    @PostMapping("/registerCheck")
-    public R userAccountCheck(@RequestBody User user){
+    @ApiOperation(value = "用户账号检查", notes = "检查用户账号是否重复")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "account", value = "用户编号", dataTypeClass = String.class, required = true)
+    })
+    @RequestMapping(value = "/registerCheck", method = RequestMethod.GET)
+    public R userAccountCheck(String account){
+        if (account!=null && !account.equals("")) {
+            return new R(false, null, "用户名为空");
+        }
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        userLambdaQueryWrapper.eq(true, User::getAccount, user.getAccount());
+        userLambdaQueryWrapper.eq(true, User::getAccount, account);
         // 查询用户是否存在
         User destUser = userServiceImpl.getOne(userLambdaQueryWrapper);
         if(destUser != null){ // 用户账号已存在
