@@ -43,7 +43,7 @@ public class FeedbackController {
     }
 
     //------------------修改-----------------------
-    @ApiOperation(value = "修改公告", notes = "根据反馈记录编号ID修改反馈信息")
+    @ApiOperation(value = "修改反馈记录", notes = "根据反馈记录编号ID修改反馈信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R updateFeedback(@RequestBody Feedback feedback) {
         return new R(feedbackServiceImpl.updateById(feedback));

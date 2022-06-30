@@ -35,7 +35,6 @@ public class LoginController {
         User loginUser = userServiceImpl.getOne(userLambdaQueryWrapper);
         if(loginUser == null){//用户不存在
             return new R(false, null, "用户不存在");
-//            return  DataResult.errByErrCode(Code.LOGIN_NOT_EXIST);
         }
         if (user.getPassword() == null || user.getPassword().equals("")) {
             return new R(false, null, "密码为空");
@@ -49,11 +48,10 @@ public class LoginController {
             // 返回信息添加：角色类型
             Role role = roleServiceImpl.getById(loginUser.getRole_id());
             userInfo.setRole_name(role.getName());
-
+            // 返回用户信息
             userInfo.setPhone(loginUser.getPhone());
             userInfo.setEmail(loginUser.getEmail());
             userInfo.setName(loginUser.getName());
-
             // 将用户数据放入session
             session.setAttribute("userInfo", userInfo);
             // 设置session过期时间
