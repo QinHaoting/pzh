@@ -19,7 +19,7 @@ public class Car {
     @TableId(value = "c_id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value="车辆类型", name="type", required=true, example = "标题1")
+    @ApiModelProperty(value="车辆类型", name="type", required=true, example = "货车")
     @TableField(value = "c_type")
     private String type;
 

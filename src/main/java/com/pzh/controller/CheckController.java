@@ -1,7 +1,9 @@
 package com.pzh.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.pzh.domain.Car;
 import com.pzh.domain.Check;
+import com.pzh.service.impl.CarServiceImpl;
 import com.pzh.service.impl.CheckServiceImpl;
 import com.pzh.util.R;
 import io.swagger.annotations.Api;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Api(tags = "车辆维修控制器")
 @Transactional
 @RestController
@@ -22,6 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class CheckController {
     @Autowired
     private CheckServiceImpl checkServiceImpl;
+
+    @Autowired
+    private CarServiceImpl carServiceImpl;
 
     //------------------查询-----------------------
     @ApiOperation(value = "查询车辆维修记录", notes = "根据输入条件进行车辆维修记录查询")
@@ -42,7 +49,14 @@ public class CheckController {
         // 根据车辆维修结果查
         checkLambdaQueryWrapper.eq((check.getResult()!=null) && (!check.getResult().equals("")),
                                                 Check::getResult, check.getResult());
-        return new R(true, checkServiceImpl.list(checkLambdaQueryWrapper));
+        List<Check> Checks = checkServiceImpl.list(checkLambdaQueryWrapper);
+        // 返回信息中添加：车牌、车辆类型
+        for (Check checkTemp: Checks) {
+            Car car = carServiceImpl.getById(checkTemp.getCar_id());
+            checkTemp.setNumber(car.getNumber()); // 车牌
+            checkTemp.setType(car.getType());     // 车辆类型
+        }
+        return new R(true, Checks);
     }
 
     //------------------添加-----------------------

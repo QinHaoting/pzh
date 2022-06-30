@@ -36,6 +36,14 @@ public class Check {
     @TableField(value = "ch_result")
     private String result;
 
+    @ApiModelProperty(value="车牌", name="number", required=true, example = "渝A001")
+    @TableField(exist = false)
+    private String number;
+
+    @ApiModelProperty(value="车辆类型", name="type", required=true, example = "货车")
+    @TableField(exist = false)
+    private String type;
+
     @ApiModelProperty(value="有效位", name="valid", required=true, example = "1")
     @TableField(value = "ch_valid")
     private Boolean valid;
