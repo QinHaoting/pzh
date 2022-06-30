@@ -56,7 +56,7 @@ public class LoginController {
             session.setAttribute("userInfo", userInfo);
             // 设置session过期时间
             session.setMaxInactiveInterval(60 * 60); // 60分钟过期
-            return new R(true, null, "登录成功");
+            return new R(true, session, "登录成功");
         }
         return new R(false, null, "密码不正确");
     }
