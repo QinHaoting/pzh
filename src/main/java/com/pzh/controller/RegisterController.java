@@ -6,6 +6,7 @@ import com.pzh.domain.User;
 import com.pzh.service.impl.RoleServiceImpl;
 import com.pzh.service.impl.UserServiceImpl;
 import com.pzh.util.R;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.nio.charset.StandardCharsets;
 
+@Api(tags = "注册控制器")
+@Transactional
 @RestController
 public class RegisterController {
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @Api(tags = "公告控制器")
+@Transactional
 @RestController
 @RequestMapping("/announce")
 public class AnnounceController {

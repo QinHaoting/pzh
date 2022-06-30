@@ -6,7 +6,9 @@ import com.pzh.domain.User;
 import com.pzh.service.impl.RoleServiceImpl;
 import com.pzh.service.impl.UserServiceImpl;
 import com.pzh.util.R;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 import java.nio.charset.StandardCharsets;
 
+@Api(tags = "登录控制器")
+@Transactional
 @RestController
 public class LoginController {
 
@@ -40,6 +44,7 @@ public class LoginController {
         }
         // 对输入的密码加密
         String userPassword = new String(DigestUtils.md5Digest(user.getPassword().getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+        System.out.println(userPassword);
         if (loginUser.getPassword().equals(userPassword)) { // 正常登入
             User userInfo = new User();
             // 返回用户账号
