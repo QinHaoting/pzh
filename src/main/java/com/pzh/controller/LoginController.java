@@ -47,6 +47,7 @@ public class LoginController {
             userInfo.setAccount(loginUser.getAccount());
             // 返回信息添加：角色类型
             Role role = roleServiceImpl.getById(loginUser.getRole_id());
+            userInfo.setRole_id(role.getId());
             userInfo.setRole_name(role.getName());
             // 返回用户信息
             userInfo.setPhone(loginUser.getPhone());
@@ -56,7 +57,9 @@ public class LoginController {
             session.setAttribute("userInfo", userInfo);
             // 设置session过期时间
             session.setMaxInactiveInterval(60 * 60); // 60分钟过期
-            return new R(true, session, "登录成功");
+
+            System.out.println(session);
+            return new R(true, userInfo, "登录成功");
         }
         return new R(false, null, "密码不正确");
     }
