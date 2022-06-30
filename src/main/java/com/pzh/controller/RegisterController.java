@@ -38,7 +38,7 @@ public class RegisterController {
     })
     @RequestMapping(value = "/registerCheck", method = RequestMethod.GET)
     public R userAccountCheck(String account){
-        if (account!=null && !account.equals("")) {
+        if (account==null || account.equals("")) {
             return new R(false, null, "用户名为空");
         }
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
