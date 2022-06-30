@@ -86,8 +86,11 @@ CREATE TABLE `tbl_check`  (
 -- ----------------------------
 -- Records of tbl_check
 -- ----------------------------
-INSERT INTO `tbl_check` VALUES (1, 1, '爆胎', '2022-06-23 16:25:25', '修好了!', b'1');
-INSERT INTO `tbl_check` VALUES (2, 6, '车玻璃损坏', '2022-06-28 08:41:30', '修好了一半', b'1');
+INSERT INTO `tbl_check` VALUES (1, 1, '爆胎', '2022-06-23 16:25:25', '已处理', b'1');
+INSERT INTO `tbl_check` VALUES (2, 6, '车玻璃损坏', '2022-06-28 08:41:30', '待处理', b'1');
+INSERT INTO `tbl_check` VALUES (3, 3, '发动机故障', '2022-06-29 06:31:37', '处理中', b'1');
+INSERT INTO `tbl_check` VALUES (4, 5, '排气管故障', '2022-06-18 16:41:15', '处理中', b'1');
+INSERT INTO `tbl_check` VALUES (5, 6, '仪表盘故障', '2022-06-03 06:52:35', '已处理', b'1');
 
 -- ----------------------------
 -- Table structure for tbl_feedback
