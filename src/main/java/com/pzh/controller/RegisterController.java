@@ -46,7 +46,7 @@ public class RegisterController {
         // 查询用户是否存在
         User destUser = userServiceImpl.getOne(userLambdaQueryWrapper);
         if(destUser != null){ // 用户账号已存在
-            return new R(false, null, null);
+            return new R(false, null, "用户账号已存在");
         }
         return new R(true, null, "用户账号可用");
     }
