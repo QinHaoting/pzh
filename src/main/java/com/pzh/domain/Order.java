@@ -24,6 +24,10 @@ public class Order implements Serializable {
     @TableField(value = "c_id")
     private Integer car_id;
 
+    @ApiModelProperty(value="车牌", name="car_number", required=true, example = "渝A001")
+    @TableField(exist = false)
+    private String car_number;
+
     @ApiModelProperty(value="外键：用户编号", name="user_id", required=true, example = "1")
     @TableField(value = "u_id")
     private Integer user_id;

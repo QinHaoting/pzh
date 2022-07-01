@@ -1,7 +1,9 @@
 package com.pzh.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.pzh.domain.Car;
 import com.pzh.domain.Order;
+import com.pzh.service.impl.CarServiceImpl;
 import com.pzh.service.impl.OrderServiceImpl;
 import com.pzh.util.R;
 import io.swagger.annotations.Api;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Api(tags = "订单控制器")
 @Transactional
 @RestController
@@ -22,6 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
     @Autowired
     private OrderServiceImpl orderServiceImpl;
+
+    @Autowired
+    private CarServiceImpl carServiceImpl;
 
     //------------------查询-----------------------
     @ApiOperation(value = "查询订单", notes = "根据输入条件进行订单查询")
@@ -51,7 +58,12 @@ public class OrderController {
         // 货物编号查
         orderLambdaQueryWrapper.eq((order.getGoods_id()!=null) && (order.getGoods_id()>=0),
                                             Order::getGoods_id, order.getGoods_id());
-        return new R(true, orderServiceImpl.list(orderLambdaQueryWrapper));
+        List<Order> orderList = orderServiceImpl.list(orderLambdaQueryWrapper);
+        for (Order orderTemp: orderList) {
+            Car car = carServiceImpl.getById(orderTemp.getCar_id());
+            orderTemp.setCar_number(car.getNumber());
+        }
+        return new R(true, orderList);
     }
 
     //------------------添加-----------------------
