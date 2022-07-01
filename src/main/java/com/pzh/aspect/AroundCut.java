@@ -17,8 +17,9 @@ import javax.servlet.http.HttpSession;
 public class AroundCut {
     public static final String POINT_CUT = "execution(* com.pzh.controller..*.*(..))"+ " && "
             + "!execution(* com.pzh.controller.LoginController.login(..))" + " && "  // 排除登录
-            + "!execution(* com.pzh.controller.RegisterController.*(..))" + " && "
-            + "!execution(* com.pzh.controller.OrderController.getOrderByCondition(..))"; // 排除注册
+            + "!execution(* com.pzh.controller.RegisterController.*(..))" + " && "   // 排除注册
+            + "!execution(* com.pzh.controller.OrderController.getOrderByCondition(..))" + " && "
+            + "!execution(* com.pzh.controller.AnnounceController.getAnnounceByCondition(..))"; // 排除
 
 
     @Around(AroundCut.POINT_CUT)
