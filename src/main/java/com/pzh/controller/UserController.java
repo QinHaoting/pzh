@@ -93,8 +93,6 @@ public class UserController {
     @ApiOperation(value = "修改用户信息", notes = "根据用户编号ID修改用户信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R updateUser(@RequestBody User user) {
-        String password = new String(DigestUtils.md5Digest(user.getPassword().getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
-        user.setPassword(password);
         return new R(true, userServiceImpl.updateById(user));
     }
 
