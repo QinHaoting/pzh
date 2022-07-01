@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 30/06/2022 16:15:31
+ Date: 01/07/2022 17:01:21
 */
 
 SET NAMES utf8mb4;
@@ -35,8 +35,9 @@ CREATE TABLE `tbl_announce`  (
 -- Records of tbl_announce
 -- ----------------------------
 INSERT INTO `tbl_announce` VALUES (10001, '攀枝花控股股份有限公司\n关于开立闲置募集资金现金管理专用结算账户的公告', '攀枝花控股股份有限公司（以下简称“公司”）于 2021 年 10 月 28 日召开第五\n届董事会第十九次会议、第五届监事会第十七次会议，审议通过了《关于使用部\n分闲置募集资金进行现金管理的议案》，在确保不影响募集资金项目建设和募集\n资金使用的前提下，同意公司使用不超过人民币 135 亿元闲置募集资金进行现金\n管理，额度内资金可以循环使用，投资品种发行主体为商业银行及其他金融机构，\n有效期限自第五届董事会第十九次会议审议通过之日起，至 2022 年年度股东大\n会止。公司独立董事、保荐机构及监事会均对该议案发表了明确的同意意见。具\n体内容详见公司于 2021 年 10 月 29 日在《证券时报》、《证券日报》、《上海证券\n报》、《中国证券报》和巨潮资讯网（http://www.cninfo.com.cn）上披露的公告（公\n告编号：2021-115、2021-116、2121-119）。', 'czr', '2022-06-23 16:25:25', b'1');
-INSERT INTO `tbl_announce` VALUES (10003, '2022第二季度报告', '为打造综合物流服务能力和长期核心竞争力，完善产品矩阵，提高市场份额，公司积极拓展时效快递、经济快递、快运、\n冷运、同城急送、国际、供应链等各业务板块细分市场，夯实新的增长曲线，保持长期可持续发展。2021 年前三季度公司\n实现速运物流业务量 77.36 亿票，在去年同期业务量增速 75.06%的高增长基础上，仍实现同比增长 36.39%；实现总营业收\n入 1358.61 亿元，同比增长 23.97%。', 'Haoting', '2022-06-26 08:25:25', b'0');
+INSERT INTO `tbl_announce` VALUES (10003, '2022第二季度报告', '为打造综合物流服务能力和长期核心竞争力，完善产品矩阵，提高市场份额，公司积极拓展时效快递、经济快递、快运、\n冷运、同城急送、国际、供应链等各业务板块细分市场，夯实新的增长曲线，保持长期可持续发展。2021 年前三季度公司\n实现速运物流业务量 77.36 亿票，在去年同期业务量增速 75.06%的高增长基础上，仍实现同比增长 36.39%；实现总营业收\n入 1358.61 亿元，同比增长 23.97%。', 'Haoting', '2022-06-26 08:25:25', b'1');
 INSERT INTO `tbl_announce` VALUES (10004, '攀枝花控股股份有限公司\n关于修订《公司章程》的公告 ', '攀枝花控股股份有限公司（以下简称“公司”）第五届董事会第十八次会议，\n审议通过了《关于修订<公司章程>的议案》。根据《上市公司治理准则》等规定，\n结合公司实际经营需要，公司拟对《公司章程》进行修改。详情如下：', 'Haoting', '2022-06-26 08:25:25', b'1');
+INSERT INTO `tbl_announce` VALUES (10005, '攀枝花控股股份有限公司\n关于修订《公司章程》的公告 ', '攀枝花控股股份有限公司（以下简称“公司”）第五届董事会第十八次会议，\n审议通过了《关于修订<公司章程>的议案》。根据《上市公司治理准则》等规定，\n结合公司实际经营需要，公司拟对《公司章程》进行修改。详情如下：', 'Haoting', '2022-06-27 08:25:25', b'1');
 
 -- ----------------------------
 -- Table structure for tbl_car
@@ -81,7 +82,7 @@ CREATE TABLE `tbl_check`  (
   PRIMARY KEY (`ch_id`) USING BTREE,
   INDEX `c_id`(`c_id`) USING BTREE,
   CONSTRAINT `tbl_check_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `tbl_car` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_check
@@ -108,7 +109,7 @@ CREATE TABLE `tbl_feedback`  (
 -- ----------------------------
 INSERT INTO `tbl_feedback` VALUES (1, '反馈1', 1);
 INSERT INTO `tbl_feedback` VALUES (2, '饭2', 1);
-INSERT INTO `tbl_feedback` VALUES (3, '和3', 0);
+INSERT INTO `tbl_feedback` VALUES (3, '和3', 1);
 INSERT INTO `tbl_feedback` VALUES (4, '大会4', 0);
 INSERT INTO `tbl_feedback` VALUES (5, '大会', 0);
 INSERT INTO `tbl_feedback` VALUES (6, '好多天', 0);
@@ -228,7 +229,7 @@ CREATE TABLE `tbl_order`  (
   CONSTRAINT `tbl_order_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `tbl_user` (`u_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tbl_order_ibfk_2` FOREIGN KEY (`g_id`) REFERENCES `tbl_goods` (`g_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tbl_order_ibfk_3` FOREIGN KEY (`c_id`) REFERENCES `tbl_car` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 343 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 439 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_order
@@ -706,7 +707,7 @@ CREATE TABLE `tbl_user`  (
   UNIQUE INDEX `u_account`(`u_account`) USING BTREE,
   INDEX `r_id`(`r_id`) USING BTREE,
   CONSTRAINT `tbl_user_ibfk_1` FOREIGN KEY (`r_id`) REFERENCES `tbl_role` (`r_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 111 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 112 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_user
@@ -814,6 +815,8 @@ INSERT INTO `tbl_user` VALUES (108, '94', 2, '�\n�9I�Y��V�W��>'
 INSERT INTO `tbl_user` VALUES (109, '95', 2, '�\n�9I�Y��V�W��>', '13212344321', NULL, '武淑贞', b'1');
 INSERT INTO `tbl_user` VALUES (110, '96', 2, '�\n�9I�Y��V�W��>', '13212344321', NULL, '古瑞灵', b'1');
 INSERT INTO `tbl_user` VALUES (111, '121212', 2, '�\n�9I�Y��V�W��>', NULL, '888@qq.com', 'HT', b'1');
+INSERT INTO `tbl_user` VALUES (113, '2222', 2, '�\n�9I�Y��V�W��>', NULL, '', '', b'1');
+INSERT INTO `tbl_user` VALUES (114, '00000', 2, '��(�8��`�6x�.', '10089', '123123@qq.com', '憨憨', b'1');
 
 -- ----------------------------
 -- Table structure for tbl_warehouse
