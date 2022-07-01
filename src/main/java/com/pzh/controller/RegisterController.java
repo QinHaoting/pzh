@@ -41,16 +41,12 @@ public class RegisterController {
     })
     @RequestMapping(value = "/registerCheck", method = RequestMethod.GET)
     public R userAccountCheck(String account){
-        // 后端不检查用户账号为空
-//        if (account==null || account.equals("")) {
-//            return new R(false, null, "用户名为空");
-//        }
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
         userLambdaQueryWrapper.eq(true, User::getAccount, account);
         // 查询用户是否存在
         User destUser = userServiceImpl.getOne(userLambdaQueryWrapper);
         if(destUser != null){ // 用户账号已存在
-            return new R(false, null, "用户账号已被注册");
+            return new R(false, null, null);
         }
         return new R(true, null, "用户账号可用");
     }
@@ -65,7 +61,9 @@ public class RegisterController {
         if(destUser != null){ // 用户账号已存在
             return new R(false, null, "用户账号已被注册");
         }
-
+        if (user.getAccount() == null || user.getAccount().equals("")) {
+            return new R(false, null, "用户名为空");
+        }
         if (user.getPassword() == null || user.getPassword().equals("")) {
             return new R(false, null, "密码为空");
         }

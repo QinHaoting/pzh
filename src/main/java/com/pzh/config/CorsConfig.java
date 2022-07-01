@@ -1,4 +1,4 @@
-package com.pzh.config;//package com.pzh.config;
+package com.pzh.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
