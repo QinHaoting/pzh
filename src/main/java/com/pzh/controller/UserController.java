@@ -93,12 +93,14 @@ public class UserController {
     @ApiOperation(value = "修改用户信息", notes = "根据用户编号ID修改用户信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R updateUser(@RequestBody User user) {
+        System.out.println(user);
         // 检测修改的用户账号，防止重复
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
         String account = user.getAccount(); // 用户账号
         if (account!=null && !account.equals("")) { // 用户账号不为空，修改用户账号
             userLambdaQueryWrapper.eq(true, User::getAccount, account);
-            if (!userServiceImpl.getOne(userLambdaQueryWrapper).getId().equals(user.getId())) { // 用户账号已存在
+            User userTemp = userServiceImpl.getOne(userLambdaQueryWrapper);
+            if (userTemp != null && !userTemp.getId().equals(user.getId())) { // 用户账号已存在
                 return new R(false, null, "用户账号已被注册");
             }
         }
@@ -108,6 +110,8 @@ public class UserController {
             password = new String(DigestUtils.md5Digest(user.getPassword().getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
             user.setPassword(password); // MD5加密
         }
+        System.out.println(user);
+
         return new R(true, userServiceImpl.updateById(user));
     }
 
