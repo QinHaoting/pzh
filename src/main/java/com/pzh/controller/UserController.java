@@ -96,10 +96,11 @@ public class UserController {
         // 检测修改的用户账号，防止重复
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
         String account = user.getAccount(); // 用户账号
-        userLambdaQueryWrapper.eq(account!=null && !account.equals(""),
-                                    User::getAccount, account);
-        if (!userServiceImpl.getOne(userLambdaQueryWrapper).getId().equals(user.getId())) {
-            return new R(false, null, "用户账号已被注册");
+        if (account!=null && !account.equals("")) { // 用户账号不为空，修改用户账号
+            userLambdaQueryWrapper.eq(true, User::getAccount, account);
+            if (!userServiceImpl.getOne(userLambdaQueryWrapper).getId().equals(user.getId())) { // 用户账号已存在
+                return new R(false, null, "用户账号已被注册");
+            }
         }
         // 检查密码是否为空，若不为空，则进行MD5加密
         String password = user.getPassword();
