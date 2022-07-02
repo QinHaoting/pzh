@@ -134,7 +134,7 @@ INSERT INTO `tbl_feedback` VALUES (13, '他舆论', 1);
 INSERT INTO `tbl_feedback` VALUES (14, '后台', 0);
 INSERT INTO `tbl_feedback` VALUES (15, 'v刚好', 0);
 INSERT INTO `tbl_feedback` VALUES (16, '第16条', 0);
-INSERT INTO `tbl_feedback` VALUES (17, '这个物流公司什么时候能在黑龙江有业务', 0);
+INSERT INTO `tbl_feedback` VALUES (17, '这个物流公司业务发展潜力很大', 0);
 INSERT INTO `tbl_feedback` VALUES (18, '系统真不戳', 0);
 INSERT INTO `tbl_feedback` VALUES (19, '希望物流系统越来越好！', 0);
 
