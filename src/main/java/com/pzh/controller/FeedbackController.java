@@ -5,8 +5,6 @@ import com.pzh.domain.Feedback;
 import com.pzh.service.impl.FeedbackServiceImpl;
 import com.pzh.util.R;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +32,7 @@ public class FeedbackController {
         // 根据反馈记录状态查
         feedbackLambdaQueryWrapper.eq((feedback.getStatus()!=null) && (feedback.getStatus()>=0),
                 Feedback::getStatus, feedback.getStatus());
+        feedbackLambdaQueryWrapper.orderByDesc(Feedback::getId);
         return new R(true, feedbackServiceImpl.list(feedbackLambdaQueryWrapper));
     }
 
