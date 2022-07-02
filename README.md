@@ -1,5 +1,8 @@
 # 攀枝花物流管理系统
 
+## 简介
+攀枝花物流管理系统后端项目
+
 ## 框架
 
 后端：Springboot + MyBatis Plus
@@ -22,7 +25,7 @@
         <img src="https://img.shields.io/badge/Springboot-2.7.1-green.svg" alt="Layui Version">
     </a>
     <a href="#">
-        <img src="https://img.shields.io/badge/node.js-6.15.x-green.svg" alt="Layui Version">
+        <img src="https://img.shields.io/badge/node.js-16.15.x-green.svg" alt="Layui Version">
     </a>
 </p>
 
@@ -32,15 +35,27 @@
 
 - IDEA Professional `2021.3.1`
 
+#### 数据库管理工具
+
 - Navicat Premium `15.0.x`
+
+#### API工具
+
 - Postman `9.19.0`
+- Apifox `2.1.25`
 
 ### 前端
 
 - HBuilder X `3.4.x`
 
+#### node.js工具包
+
+- npm `8.12.2`
+- nvm `1.1.9`
+
 ## 项目准备
 
-1. 先创建一个名为`pzh_db`数据库，然后导入`.\src\main\java\com\pzh\sql\pzh_db.sql`数据库脚本文件
-2. 然后去`.\src\main\resources\application.yml`改其中的数据库配置，如用户名、密码
-3. 然后**IDEA**项目运行即可
+1. 首先加载`./pom.xml`，加载依赖
+2. 然后创建一个名为`pzh_db`数据库，然后导入`.\src\main\java\com\pzh\sql\pzh_db.sql`数据库脚本文件
+3. 再去`.\src\main\resources\application.yml`改其中的数据库配置，如用户名、密码
+4. 最后**IDEA**项目运行即可
