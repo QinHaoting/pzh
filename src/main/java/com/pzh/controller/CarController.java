@@ -2,6 +2,7 @@ package com.pzh.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pzh.domain.Car;
+import com.pzh.domain.User;
 import com.pzh.service.impl.CarServiceImpl;
 import com.pzh.util.R;
 import io.swagger.annotations.Api;
@@ -63,11 +64,14 @@ public class CarController {
     @ApiOperation(value = "修改车辆", notes = "根据车辆编号ID修改车辆信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R updateCar(@RequestBody Car car) {
-        LambdaQueryWrapper<Car> carLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        carLambdaQueryWrapper.eq((car.getNumber()!=null) && (!car.getNumber().equals("")),
-                Car::getNumber, car.getNumber());
-        if (carServiceImpl.getOne(carLambdaQueryWrapper) != null) {
-            return new R(false, null, "车牌已存在");
+        String number = car.getNumber();
+        if ((number!=null) && (!number.equals(""))) { // 修改车牌
+            LambdaQueryWrapper<Car> carLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            carLambdaQueryWrapper.eq(true, Car::getNumber, car.getNumber());
+            Car carTemp = carServiceImpl.getOne(carLambdaQueryWrapper);
+            if (carTemp != null && !carTemp.getId().equals(car.getId())) { // 车牌已存在
+                return new R(false, null, "车牌已存在");
+            }
         }
         return new R(carServiceImpl.updateById(car));
     }
