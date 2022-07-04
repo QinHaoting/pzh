@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 02/07/2022 16:11:00
+ Date: 04/07/2022 11:06:00
 */
 
 SET NAMES utf8mb4;
@@ -29,15 +29,15 @@ CREATE TABLE `tbl_announce`  (
   `a_time` datetime(0) NOT NULL,
   `a_valid` bit(1) NOT NULL,
   PRIMARY KEY (`a_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10006 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10010 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_announce
 -- ----------------------------
 INSERT INTO `tbl_announce` VALUES (10001, '攀枝花控股股份有限公司\n关于开立闲置募集资金现金管理专用结算账户的公告', '攀枝花控股股份有限公司（以下简称“公司”）于 2021 年 10 月 28 日召开第五\n届董事会第十九次会议、第五届监事会第十七次会议，审议通过了《关于使用部\n分闲置募集资金进行现金管理的议案》，在确保不影响募集资金项目建设和募集\n资金使用的前提下，同意公司使用不超过人民币 135 亿元闲置募集资金进行现金\n管理，额度内资金可以循环使用，投资品种发行主体为商业银行及其他金融机构，\n有效期限自第五届董事会第十九次会议审议通过之日起，至 2022 年年度股东大\n会止。公司独立董事、保荐机构及监事会均对该议案发表了明确的同意意见。具\n体内容详见公司于 2021 年 10 月 29 日在《证券时报》、《证券日报》、《上海证券\n报》、《中国证券报》和巨潮资讯网（http://www.cninfo.com.cn）上披露的公告（公\n告编号：2021-115、2021-116、2121-119）。', 'czr', '2022-06-23 16:25:25', b'1');
 INSERT INTO `tbl_announce` VALUES (10003, '2022第二季度报告1', '为打造综合物流服务能力和长期核心竞争力，完善产品矩阵，提高市场份额，公司积极拓展时效快递、经济快递、快运、\n冷运、同城急送、国际、供应链等各业务板块细分市场，夯实新的增长曲线，保持长期可持续发展。2021 年前三季度公司\n实现速运物流业务量 77.36 亿票，在去年同期业务量增速 75.06%的高增长基础上，仍实现同比增长 36.39%；实现总营业收\n入 1358.61 亿元，同比增长 23.97%。', 'Haoting', '2022-07-02 15:50:39', b'1');
-INSERT INTO `tbl_announce` VALUES (10004, '关于攀枝花控股股份有限公司关于修订《公司章程》的公告 ', '攀枝花控股股份有限公司（以下简称“公司”）第五届董事会第十八次会议，\n审议通过了《关于修订<公司章程>的议案》。根据《上市公司治理准则》等规定，\n结合公司实际经营需要，公司拟对《公司章程》进行修改。详情如下：', 'Haoting', '2022-07-02 15:15:10', b'1');
-INSERT INTO `tbl_announce` VALUES (10005, '攀枝花控股股份有限公司\n关于修订《公司章程》的公告 ', '', '', '2022-07-02 15:03:44', b'1');
+INSERT INTO `tbl_announce` VALUES (10004, '关于攀枝花控股股份有限公司关于修订《公司章程》的公告 ', '攀枝花控股股份有限公司（以下简称“公司”）第五届董事会第十八次会议，\n审议通过了《关于修订<公司章程>的议案》。根据《上市公司治理准则》等规定，\n结合公司实际经营需要，公司拟对《公司章程》进行修改。详情如下：1', 'Haoting', '2022-07-03 14:48:59', b'1');
+INSERT INTO `tbl_announce` VALUES (10005, '攀枝花控股股份有限公司\n关于修订《公司章程》的公告 ', '具体见修订《公司章程》公告！', '宝儿姐', '2022-07-03 14:47:55', b'1');
 INSERT INTO `tbl_announce` VALUES (10006, '', '', '', '2022-07-02 14:51:14', b'0');
 INSERT INTO `tbl_announce` VALUES (10007, '', '', '', '2022-07-02 15:09:45', b'0');
 INSERT INTO `tbl_announce` VALUES (10008, '攀枝花物流系统顺利上线！！！！', '2022年7月2日15点12分攀枝花物流管理系统正式上线！！！！！！！！！！！！！！！', 'marblue', '2022-07-02 15:12:08', b'1');
@@ -56,7 +56,7 @@ CREATE TABLE `tbl_car`  (
   `c_number` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `c_valid` bit(1) NOT NULL,
   PRIMARY KEY (`c_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_car
@@ -68,10 +68,11 @@ INSERT INTO `tbl_car` VALUES (4, '卡车', 35, NULL, 'C1', '渝A004', b'1');
 INSERT INTO `tbl_car` VALUES (5, '卡车', 40, NULL, 'B1', '渝A005', b'1');
 INSERT INTO `tbl_car` VALUES (6, '小型汽车', 40, NULL, 'B2', '渝A006', b'1');
 INSERT INTO `tbl_car` VALUES (7, '货车', 55, NULL, 'B1', '渝A007', b'0');
-INSERT INTO `tbl_car` VALUES (8, '卡车', 15, NULL, 'C1', '渝A008', b'1');
-INSERT INTO `tbl_car` VALUES (9, '小型汽车', 65, NULL, 'C1', '渝A009', b'1');
+INSERT INTO `tbl_car` VALUES (8, '卡车', 15, NULL, 'C1', '渝A008', b'0');
+INSERT INTO `tbl_car` VALUES (9, '小型汽车', 65, NULL, 'C1', '渝A009', b'0');
 INSERT INTO `tbl_car` VALUES (10, '货车', 70, NULL, 'C1', '桂R001', b'0');
 INSERT INTO `tbl_car` VALUES (11, '小型汽车', 200, NULL, 'C1', '豫D700Q6', b'0');
+INSERT INTO `tbl_car` VALUES (12, '小型汽车', 20, NULL, 'C1', '琼B250', b'0');
 
 -- ----------------------------
 -- Table structure for tbl_check
@@ -87,7 +88,7 @@ CREATE TABLE `tbl_check`  (
   PRIMARY KEY (`ch_id`) USING BTREE,
   INDEX `c_id`(`c_id`) USING BTREE,
   CONSTRAINT `tbl_check_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `tbl_car` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_check
@@ -97,11 +98,9 @@ INSERT INTO `tbl_check` VALUES (2, 6, '车玻璃损坏', '2022-06-28 08:41:30', 
 INSERT INTO `tbl_check` VALUES (3, 3, '发动机故障', '2022-06-29 06:31:37', '处理中', b'1');
 INSERT INTO `tbl_check` VALUES (4, 5, '排气管故障', '2022-06-18 16:41:15', '处理中', b'1');
 INSERT INTO `tbl_check` VALUES (5, 6, '仪表盘故障', '2022-06-03 06:52:35', '已处理', b'1');
-INSERT INTO `tbl_check` VALUES (6, 11, '玻璃破碎', '2022-07-14 10:45:42', '已处理', b'1');
 INSERT INTO `tbl_check` VALUES (7, 4, '发动机故障', '2022-07-02 10:48:02', '待处理', b'1');
-INSERT INTO `tbl_check` VALUES (8, 1, '方向盘松动', '2022-07-22 10:49:49', '处理中', b'1');
-INSERT INTO `tbl_check` VALUES (9, 1, '发动机故障', '2022-07-02 10:50:34', '处理中', b'1');
-INSERT INTO `tbl_check` VALUES (10, 1, '日常检修', '2022-07-02 10:50:46', '待处理', b'1');
+INSERT INTO `tbl_check` VALUES (9, 1, '发动机故障', '2022-07-02 10:50:34', '已处理', b'1');
+INSERT INTO `tbl_check` VALUES (10, 1, '日常检修', '2022-07-02 10:50:46', '处理中', b'1');
 INSERT INTO `tbl_check` VALUES (11, 1, '车体刮花', '2022-07-02 10:50:58', '待处理', b'1');
 
 -- ----------------------------
@@ -113,7 +112,7 @@ CREATE TABLE `tbl_feedback`  (
   `fb_content` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `fb_status` int NOT NULL,
   PRIMARY KEY (`fb_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_feedback
@@ -137,6 +136,7 @@ INSERT INTO `tbl_feedback` VALUES (16, '第16条', 1);
 INSERT INTO `tbl_feedback` VALUES (17, '这个物流公司业务发展潜力很大', 1);
 INSERT INTO `tbl_feedback` VALUES (18, '系统真不戳', 0);
 INSERT INTO `tbl_feedback` VALUES (19, '希望物流系统越来越好！', 0);
+INSERT INTO `tbl_feedback` VALUES (20, '这是一条中肯的建议', 0);
 
 -- ----------------------------
 -- Table structure for tbl_firm
@@ -175,32 +175,37 @@ CREATE TABLE `tbl_goods`  (
   PRIMARY KEY (`g_id`) USING BTREE,
   INDEX `w_id`(`w_id`) USING BTREE,
   CONSTRAINT `tbl_goods_ibfk_1` FOREIGN KEY (`w_id`) REFERENCES `tbl_warehouse` (`w_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_goods
 -- ----------------------------
-INSERT INTO `tbl_goods` VALUES (1, 1, '农产品', 20, '大西瓜', 2, b'1');
+INSERT INTO `tbl_goods` VALUES (1, 3, '农产品', 20, '大西瓜真好吃', 1, b'1');
 INSERT INTO `tbl_goods` VALUES (2, 1, '建筑材料', 15, '钢筋', 1, b'1');
-INSERT INTO `tbl_goods` VALUES (3, 2, '农产品', 12, '白菜', 0, b'1');
-INSERT INTO `tbl_goods` VALUES (4, 1, '建筑材料', 5000, '瓷砖5000张', 1, b'1');
-INSERT INTO `tbl_goods` VALUES (5, 2, '农产品', 12, '西瓜', 2, b'1');
+INSERT INTO `tbl_goods` VALUES (3, 2, '农产品', 12, '白菜', 2, b'1');
+INSERT INTO `tbl_goods` VALUES (4, 1, '建筑材料', 5000, '<div style=\"color:red\">11111111111</div>\n<script>alert(111)</script>', 2, b'1');
+INSERT INTO `tbl_goods` VALUES (5, 3, '农产品', 12, '西瓜', 0, b'1');
 INSERT INTO `tbl_goods` VALUES (6, 2, '农产品', 12, '胡萝卜', 1, b'1');
 INSERT INTO `tbl_goods` VALUES (7, 2, '农产品', 20, '大豆', 2, b'0');
-INSERT INTO `tbl_goods` VALUES (8, 3, '生鲜产品', 8, '大黄鱼', 0, b'1');
+INSERT INTO `tbl_goods` VALUES (8, 3, '生鲜产品', 8, '大黄鱼', 1, b'1');
 INSERT INTO `tbl_goods` VALUES (9, 3, '生鲜产品', 8, '鲜牛肚', 2, b'1');
 INSERT INTO `tbl_goods` VALUES (10, 2, '危险品', 70, '硫酸', 1, b'1');
 INSERT INTO `tbl_goods` VALUES (11, NULL, '危险品', 100, '硫酸', 1, b'0');
 INSERT INTO `tbl_goods` VALUES (12, 3, '建筑材料', 100, '土砖', 0, b'1');
-INSERT INTO `tbl_goods` VALUES (13, NULL, '建筑材料', 1, NULL, 0, b'1');
-INSERT INTO `tbl_goods` VALUES (14, NULL, '农产品', 1, '玉米', 0, b'1');
+INSERT INTO `tbl_goods` VALUES (13, NULL, '建筑材料', 1, '红砖', 0, b'1');
+INSERT INTO `tbl_goods` VALUES (14, 3, '农产品', 1, '玉米', 2, b'1');
 INSERT INTO `tbl_goods` VALUES (15, NULL, '生鲜产品', 99, '西瓜', 0, b'1');
 INSERT INTO `tbl_goods` VALUES (16, NULL, '危险品', 500, 'TNT', 0, b'1');
 INSERT INTO `tbl_goods` VALUES (17, NULL, '生鲜产品', 22, '陈昭睿', 0, b'1');
 INSERT INTO `tbl_goods` VALUES (18, NULL, '生鲜产品', 1, '李渊科', 0, b'1');
 INSERT INTO `tbl_goods` VALUES (19, NULL, '生鲜产品', 1, '李渊科', 0, b'1');
-INSERT INTO `tbl_goods` VALUES (20, 1, '生鲜产品', 20, '22222', 0, b'0');
-INSERT INTO `tbl_goods` VALUES (21, NULL, '建筑材料', 5, '易碎', 0, b'1');
+INSERT INTO `tbl_goods` VALUES (20, 1, '生鲜产品', 20, '22222', 1, b'0');
+INSERT INTO `tbl_goods` VALUES (21, 9, '建筑材料', 5, '易碎', 1, b'1');
+INSERT INTO `tbl_goods` VALUES (22, 3, '生鲜产品', 9999, '陈昭睿', 1, b'1');
+INSERT INTO `tbl_goods` VALUES (23, 1, '农产品', 5, '12', 1, b'0');
+INSERT INTO `tbl_goods` VALUES (24, 3, '生鲜产品', 4, '大乌龟100', 1, b'1');
+INSERT INTO `tbl_goods` VALUES (25, 1, '建筑材料', 1, '砖头', 0, b'0');
+INSERT INTO `tbl_goods` VALUES (26, NULL, '危险品', 1, '秦浩廷', 0, b'1');
 
 -- ----------------------------
 -- Table structure for tbl_material
@@ -216,7 +221,7 @@ CREATE TABLE `tbl_material`  (
   PRIMARY KEY (`m_id`) USING BTREE,
   INDEX `w_id`(`w_id`) USING BTREE,
   CONSTRAINT `tbl_material_ibfk_1` FOREIGN KEY (`w_id`) REFERENCES `tbl_warehouse` (`w_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_material
@@ -229,6 +234,8 @@ INSERT INTO `tbl_material` VALUES (5, 2, '剪刀', 60, '/把', b'0');
 INSERT INTO `tbl_material` VALUES (6, 5, '笔记本电脑', 2, '用于办公', b'1');
 INSERT INTO `tbl_material` VALUES (7, 3, '大麻花', 300, '给员工的干粮', b'1');
 INSERT INTO `tbl_material` VALUES (8, 1, '大西瓜', 1, '', b'0');
+INSERT INTO `tbl_material` VALUES (9, 1, '笔', 123111, '', b'0');
+INSERT INTO `tbl_material` VALUES (10, 2, '笔', 13, '', b'0');
 
 -- ----------------------------
 -- Table structure for tbl_order
@@ -253,7 +260,7 @@ CREATE TABLE `tbl_order`  (
   CONSTRAINT `tbl_order_ibfk_1` FOREIGN KEY (`u_id`) REFERENCES `tbl_user` (`u_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tbl_order_ibfk_2` FOREIGN KEY (`g_id`) REFERENCES `tbl_goods` (`g_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tbl_order_ibfk_3` FOREIGN KEY (`c_id`) REFERENCES `tbl_car` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 444 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 445 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_order
@@ -700,6 +707,7 @@ INSERT INTO `tbl_order` VALUES (441, 4, 115, '江西省新余市渝水区下村�
 INSERT INTO `tbl_order` VALUES (442, 1, 115, '重庆市重庆市沙坪坝区虎溪街道', '甘肃省平凉市泾川县城市社区街道', 0, 18, '2022-07-02 09:06:57', '是否加急:true;注意事项:防止高温;联系电话:13308377754;门牌地址:南门;取货时间:2023-01-13 09:04:40', 247.1, b'1');
 INSERT INTO `tbl_order` VALUES (443, 6, 13, '重庆市重庆市沙坪坝区虎溪街道', '甘肃省平凉市泾川县城市社区街道', 0, 19, '2022-07-02 09:25:56', '是否加急:false;注意事项:防止高温;联系电话:13308377754;门牌地址:南门;取货时间:2023-01-13 09:24:50', 250, b'1');
 INSERT INTO `tbl_order` VALUES (444, 5, 13, '北京市北京市东城区景山街道', '山西省太原市小店区坞城街道', 0, 21, '2022-07-02 15:37:30', '是否加急:false;注意事项:注意易碎;联系电话:13333333333;门牌地址:11;取货时间:2022-07-10 15:35:58', 203.5, b'0');
+INSERT INTO `tbl_order` VALUES (445, 2, 4, '重庆市重庆市沙坪坝区虎溪街道', '广西壮族自治区贵港市桂平市西山镇', 0, 26, '2022-07-04 09:00:18', '是否加急:true;注意事项:冰柜冷藏,防止高温,注意易碎;联系电话:15333333333;门牌地址:大门;取货时间:2022-07-04 08:58:34', 194.8, b'1');
 
 -- ----------------------------
 -- Table structure for tbl_role
@@ -743,16 +751,16 @@ CREATE TABLE `tbl_user`  (
   UNIQUE INDEX `u_account`(`u_account`) USING BTREE,
   INDEX `r_id`(`r_id`) USING BTREE,
   CONSTRAINT `tbl_user_ibfk_1` FOREIGN KEY (`r_id`) REFERENCES `tbl_role` (`r_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 115 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 118 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_user
 -- ----------------------------
-INSERT INTO `tbl_user` VALUES (1, '123cccc', 1, '�\n�9I�Y��V�W��>', '13212344321', '20191111@cqu.edu.cn', '宝儿姐', b'1');
-INSERT INTO `tbl_user` VALUES (4, '808080', 2, '�\n�9I�Y��V�W��>', '13212344333', '12345@678.com', '秦浩廷', b'1');
+INSERT INTO `tbl_user` VALUES (1, 'root', 1, '�\n�9I�Y��V�W��>', '13212344321', '20191111@cqu.edu.cn', '宝儿姐', b'1');
+INSERT INTO `tbl_user` VALUES (4, 'user', 2, '�\n�9I�Y��V�W��>', '13212344333', '12345@678.com', '秦浩廷', b'1');
 INSERT INTO `tbl_user` VALUES (5, '456', 2, '�\n�9I�Y��V�W��>', '13212344321', NULL, 'iii', b'0');
 INSERT INTO `tbl_user` VALUES (8, '2476607654', 1, '�\n�9I�Y��V�W��>', '17772816653', '20194238@cqu.edu.cn', 'marblue', b'1');
-INSERT INTO `tbl_user` VALUES (13, '07039287', 2, '���^�,��I�Z3', '13212312322', '20194289@cqu.edu.cn', 'Lyk', b'1');
+INSERT INTO `tbl_user` VALUES (13, '07039287', 2, '�\n�9I�Y��V�W��>', '13212312322', '20194289@cqu.edu.cn', 'Lyk', b'1');
 INSERT INTO `tbl_user` VALUES (14, '9090', 2, '�\n�9I�Y��V�W��>', '1321230000', '789@qq.com', 'Haoting', b'1');
 INSERT INTO `tbl_user` VALUES (15, 'q123456', 2, '�\n�9I�Y��V�W��>', '13212344321', '123@163.com', '家柔怀', b'1');
 INSERT INTO `tbl_user` VALUES (16, '21111111', 2, '�\n�9I�Y��V�W��>', '15212344321', NULL, '金佳妍', b'1');
@@ -870,21 +878,23 @@ CREATE TABLE `tbl_warehouse`  (
   PRIMARY KEY (`w_id`) USING BTREE,
   INDEX `f_id`(`f_id`) USING BTREE,
   CONSTRAINT `tbl_warehouse_ibfk_1` FOREIGN KEY (`f_id`) REFERENCES `tbl_firm` (`f_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tbl_warehouse
 -- ----------------------------
-INSERT INTO `tbl_warehouse` VALUES (1, 1, 10000, '重庆', b'1');
+INSERT INTO `tbl_warehouse` VALUES (1, 1, 100000, '重庆', b'1');
 INSERT INTO `tbl_warehouse` VALUES (2, 1, 10000, '四川', b'1');
 INSERT INTO `tbl_warehouse` VALUES (3, 1, 10000, '湖北', b'1');
 INSERT INTO `tbl_warehouse` VALUES (4, 1, 50000, '广西', b'1');
-INSERT INTO `tbl_warehouse` VALUES (5, 1, 5000, '广西', b'1');
+INSERT INTO `tbl_warehouse` VALUES (5, 1, 50000, '广西', b'1');
 INSERT INTO `tbl_warehouse` VALUES (6, 1, 88888, '西藏', b'1');
 INSERT INTO `tbl_warehouse` VALUES (8, 1, 808088, '广东', b'0');
 INSERT INTO `tbl_warehouse` VALUES (9, 1, 1, '黑龙江', b'0');
 INSERT INTO `tbl_warehouse` VALUES (10, 1, 123, '甘肃', b'1');
 INSERT INTO `tbl_warehouse` VALUES (11, 1, 9999, '陕西', b'1');
 INSERT INTO `tbl_warehouse` VALUES (12, 1, 5000, '四川', b'0');
+INSERT INTO `tbl_warehouse` VALUES (13, 1, 1000, '重庆', b'0');
+INSERT INTO `tbl_warehouse` VALUES (14, 1, 10000, '重庆', b'0');
 
 SET FOREIGN_KEY_CHECKS = 1;
