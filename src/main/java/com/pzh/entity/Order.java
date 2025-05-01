@@ -1,4 +1,4 @@
-package com.pzh.domain;
+package com.pzh.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -63,5 +63,5 @@ public class Order implements Serializable {
 
     @ApiModelProperty(value="有效位", name="valid", required=true, example = "1")
     @TableField(value = "o_valid")
-    private Boolean valid;
+    private Boolean valid = true;
 }
