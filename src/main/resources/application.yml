@@ -1,21 +1,81 @@
 # 服务器配置
 server:
-  port: 80
-
+  port: 8080
 
 spring:
   # 数据源配置
   datasource:
+    # 普通数据库连接
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/pzh_db?serverTimezone=UTC
+#    username: root
+#    password: 123456
+
+    # 使用Druid连接池
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/pzh_db?serverTimezone=UTC
+      url: jdbc:mysql://localhost:3306/pzh_db?serverTimezone=UTC&rewriteBatchedStatements=true
       username: root
       password: 123456
+      initial-size: 15
+      max-active: 50 # 最大连接数
+      min-idle: 10 # 最小连接数
+      max-wait: 60000 # 最大等待时间
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      # Spring 监控，利用aop 对指定接口的执行时间，jdbc数进行记录
+      aop-patterns: "com.springboot.template.dao.*"
+      ########### 启用内置过滤器（第一个 stat必须，否则监控不到SQL）##########
+      filters: stat,wall,log4j2
+      # 自己配置监控统计拦截的filter
+      filter:
+        # 开启druiddatasource的状态监控
+        stat:
+          enabled: true
+          db-type: mysql
+          # 开启慢sql监控，超过2s 就认为是慢sql，记录到日志中
+          log-slow-sql: true
+          slow-sql-millis: 2000
+        # 日志监控，使用slf4j 进行日志输出
+        slf4j:
+          enabled: true
+          statement-log-error-enabled: true
+          statement-create-after-log-enabled: false
+          statement-close-after-log-enabled: false
+          result-set-open-after-log-enabled: false
+          result-set-close-after-log-enabled: false
+      # 采集web关联监控的数据
+      web-stat-filter:
+        enabled: true                   # 启动 StatFilter
+        url-pattern: /*                 # 过滤所有url
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" # 排除一些不必要的url
+        session-stat-enable: true       # 开启session统计功能
+        session-stat-max-count: 1000    # session的最大个数,默认100
+      # 开启连接池监控
+      stat-view-servlet:
+        enabled: true                   # 启用StatViewServlet
+        url-pattern: /druid/*           # 访问内置监控页面的路径，内置监控页面的首页是/druid/index.html
+        reset-enable: false              # 不允许清空统计数据,重新计算
+        login-username: root            # 配置监控页面访问密码
+        login-password: 123456
+        allow: 127.0.0.1           # 允许访问的地址，如果allow没有配置或者为空，则允许所有访问
+        deny:                                        # 拒绝访问的地址，deny优先于allow，如果在deny列表中，就算在allow列表中，也会被拒绝
+  cache: # 缓存设定为redis
+    type: redis
+  # Redis
+  redis:
+    host: localhost
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 8 # 最大连接数
+        max-idle: 8 # 最小连接数
+        min-idle: 0
+        max-wait: 1000 # 最大等待时间
   # swagger配置
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-
 
 # MybatisPlus配置
 mybatis-plus:
@@ -32,7 +92,19 @@ mybatis-plus:
 swagger:
   enable: true
 
-
+# 日志配置
 logging:
   level:
     io.swagger.models.parameters.AbstractSerializableParameter: error
+    root: INFO
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){magenta} [${PID:- }] [%thread] %clr(%-5level) %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [${PID:- }] [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: ./logs/app.log  # 包含路径和文件名
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 30
+      clean-history-on-start: false
+      file-name-pattern: app-%d{yyyy-MM-dd}.%i.log  # 滚动文件命名格式
